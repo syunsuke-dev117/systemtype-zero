@@ -8,6 +8,6 @@
 </head>
 <body>
   <h1>メインページ</h1>
-  <h2>こんにちは。${user}さん</h2>
+  <h2>こんにちは。${login_name}さん</h2>
 </body>
 </html>

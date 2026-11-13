@@ -12,12 +12,12 @@
 
 <form action="${pageContext.request.contextPath}/Login" method="post">
   <div>
-    <label>User</label>
-    <input type="text" name="user">
+    <label>LoginId</label>
+    <input type="text" name="login_id">
   </div>
   <div>
-    <label>Password</label>
-    <input type="text" name="pw">
+    <label>LoginPw</label>
+    <input type="text" name="login_pw">
   </div>
   <div>
     <input type="submit" value="Registration">
