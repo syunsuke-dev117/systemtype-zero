@@ -8,14 +8,16 @@
 </head>
 <body>
 
-<form action="" method="post">
+<h1>ログインページ</h1>
+
+<form action="${pageContext.request.contextPath}/Login" method="post">
   <div>
     <label>User</label>
-    <input type="text" name="">
+    <input type="text" name="user">
   </div>
   <div>
     <label>Password</label>
-    <input type="text" name="">
+    <input type="text" name="pw">
   </div>
   <div>
     <input type="submit" value="Registration">
