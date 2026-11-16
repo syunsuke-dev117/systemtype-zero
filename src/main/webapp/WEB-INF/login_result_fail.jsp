@@ -7,7 +7,7 @@
     <title>LoginResult</title>
 </head>
 <body>
-  <h1>パスワードが違います</h1>
+  <h1>IDまたはパスワードが違います</h1>
   <h2>下記リンクからログイン画面にお戻りください</h2>
   <h3><a href="${pageContext.request.contextPath}/Login">ログインページ</a></h3>
 </body>
