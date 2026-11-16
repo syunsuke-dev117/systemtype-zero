@@ -12,43 +12,35 @@ public class LoginDAO {
     public LoginDAO(Connection cn){
         this.cn = cn;
     }
-    
-    // ログインした際のIDを使用してネームを算出する
-    public LoginUser findLoginUserName(int login_id) throws SQLException{
-        // ログインユーザのネームを算出するSQL文を定義
-        String sql = "SELECT student_id , student_name , student_password FROM students WHERE student_id = ?";
 
-        PreparedStatement stmt = null;
-        ResultSet res = null;
+    // ログイン照会する際の処理
+    public LoginUser login(int login_id, String login_pw) throws SQLException{
+        // ログインユーザの情報を算出
+        String sql = "SELECT student_id  , student_name, student_password FROM students WHERE student_id = ? AND student_password = ?";
         LoginUser login_user = null;
 
         /* PreparedStatementの作成
         *  パラメータの設定
            SQL文の実行              */
-        try {
-            // PreparedStatmentにより、SQLの処理がはやくなる
-            stmt = cn.prepareStatement(sql);
-            // SQL文の「?」にlogin_idを代入する
+        try (PreparedStatement stmt = cn.prepareStatement(sql)){
+            // SQL文の「?」にlogin_idとlogin_pwを代入する
             stmt.setInt(1, login_id);
-            res  = stmt.executeQuery();
+            stmt.setString(2, login_pw);
 
-            // 算出した結果があればLoginUserに値を格納
-            if(res.next()){
-                login_user = new LoginUser(
-                        res.getInt("student_id"),
-                        res.getString("student_name"),
-                        res.getString("student_password")
-                );
-            }
-
-        }catch(SQLException e){
-            e.printStackTrace();
-        }finally{
-
-                res.close();
-                stmt.close();
+            try (ResultSet res = stmt.executeQuery()){
+                // 算出した結果があればLoginUserに値を格納
+                // またこの処理により、データがある際はログイン成功となり、ない場合は失敗となる。
+                if(res.next()){
+                    login_user = new LoginUser(
+                            res.getInt("student_id"),
+                            res.getString("student_name"),
+                            res.getString("student_password")
+                    );
+                    return login_user;
+                }
+            }  
         }
         
-        return login_user;
+        return null;
     }
 }

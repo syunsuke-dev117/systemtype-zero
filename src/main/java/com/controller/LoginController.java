@@ -7,11 +7,9 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.SQLException;
 
 import com.model.LoginUser;
-import com.model.LoginLogic;
 import com.model.ConnectionManager;
 import com.model.LoginDAO;
 
@@ -37,7 +35,6 @@ public class LoginController extends HttpServlet {
     request.setCharacterEncoding("UTF-8");
     // ブラウザからのログインID・パスワードの値を取得する
     int login_id      = Integer.parseInt(request.getParameter("login_id"));
-    /// TODO: 現在login_pwが使われていないので、この変数を利用してパスワード照会ロジックを考える
     String login_pw   = request.getParameter("login_pw");
 
     try{
@@ -45,16 +42,13 @@ public class LoginController extends HttpServlet {
       Connection cn = null;
       cn = ConnectionManager.getConnection();
 
-      // DAOクラスを呼び出しSQLにて結果を算出してユーザネームを取得する
+      // ConnectionとDAOを繋げる
       LoginDAO login_dao   = new LoginDAO(cn);
-      LoginUser login_user = login_dao.findLoginUserName(login_id);
+      // LoginLogic
+      LoginUser login_user = login_dao.login(login_id, login_pw);
 
-      // Loginロジッククラスを呼ぶ
-      LoginLogic login_is  = new LoginLogic();
-      boolean login_result = login_is.login(login_user);
-
-      // 指定のPWなら
-      if(login_result){
+      // login_userの中身に照会データがあるなら
+      if(login_user != null){
         // 値を次のjspに引き渡す
         request.setAttribute("login_name", login_user.getLoginName());
         request.getRequestDispatcher("/WEB-INF/login_result_success.jsp").forward(request, response);
@@ -63,7 +57,7 @@ public class LoginController extends HttpServlet {
       }
     }catch(SQLException e){
       e.printStackTrace();
-      // View側にエラーを返す7
+      // View側にエラーを返す
       response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
     }
 
