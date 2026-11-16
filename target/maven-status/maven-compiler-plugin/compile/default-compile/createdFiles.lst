@@ -1,3 +1,4 @@
-com/model/LoginLogic.class
 com/controller/LoginController.class
+com/model/LoginDAO.class
 com/model/LoginUser.class
+com/model/ConnectionManager.class
