@@ -13,11 +13,11 @@
 <form action="${pageContext.request.contextPath}/Login" method="post">
   <div>
     <label>LoginId</label>
-    <input type="text" name="login_id">
+    <input type="text" name="login_id" required>
   </div>
   <div>
     <label>LoginPw</label>
-    <input type="text" name="login_pw">
+    <input type="text" name="login_pw" required>
   </div>
   <div>
     <input type="submit" value="Registration">
