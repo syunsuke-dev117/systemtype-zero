@@ -12,6 +12,7 @@ import java.sql.SQLException;
 import com.model.LoginUser;
 import com.model.ConnectionManager;
 import com.model.LoginDAO;
+import com.model.LoginLogic;
 
 @WebServlet("/Login")
 public class LoginController extends HttpServlet {
@@ -39,12 +40,9 @@ public class LoginController extends HttpServlet {
     // ConnectionManagerを通してDBの接続を取得
     try(Connection cn = ConnectionManager.getConnection()){
 
-      // ConnectionとDAOを繋げる
-      LoginDAO loginDao   = new LoginDAO(cn);
-      // LoginLogic
-      LoginUser loginUser = loginDao.login(loginId, loginPw);
+      // ログイン判定→OKなら値がLoginUserに格納、なければnull
+      LoginUser loginUser = new LoginLogic().isLogin(loginId, loginPw);
 
-      // login_userの中身に照会データがあるなら
       if(loginUser != null){
         // 値を次のjspに引き渡す
         request.setAttribute("login_name", loginUser.getLoginName());
