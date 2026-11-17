@@ -20,7 +20,7 @@
     <input type="text" name="login_pw" required>
   </div>
   <div>
-    <input type="submit" value="Registration">
+    <input type="submit" value="ログイン">
   </div>
 </form>
 

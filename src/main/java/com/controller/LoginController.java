@@ -21,7 +21,6 @@ public class LoginController extends HttpServlet {
 
     try{
       response.setContentType("text/html; charset=UTF-8");
-      System.out.println("LoginController doGet");
       // login.jspへ転送
       request.getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
     }catch(ServletException | IOException e){
@@ -34,23 +33,21 @@ public class LoginController extends HttpServlet {
   protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException , IOException {
     request.setCharacterEncoding("UTF-8");
     // ブラウザからのログインID・パスワードの値を取得する
-    int login_id      = Integer.parseInt(request.getParameter("login_id"));
-    String login_pw   = request.getParameter("login_pw");
+    int loginId     = Integer.parseInt(request.getParameter("login_id"));
+    String loginPw  = request.getParameter("login_pw");
 
-    try{
-      // ConnectionManagerを通してDBの接続を取得
-      Connection cn = null;
-      cn = ConnectionManager.getConnection();
+    // ConnectionManagerを通してDBの接続を取得
+    try(Connection cn = ConnectionManager.getConnection()){
 
       // ConnectionとDAOを繋げる
-      LoginDAO login_dao   = new LoginDAO(cn);
+      LoginDAO loginDao   = new LoginDAO(cn);
       // LoginLogic
-      LoginUser login_user = login_dao.login(login_id, login_pw);
+      LoginUser loginUser = loginDao.login(loginId, loginPw);
 
       // login_userの中身に照会データがあるなら
-      if(login_user != null){
+      if(loginUser != null){
         // 値を次のjspに引き渡す
-        request.setAttribute("login_name", login_user.getLoginName());
+        request.setAttribute("login_name", loginUser.getLoginName());
         request.getRequestDispatcher("/WEB-INF/login_result_success.jsp").forward(request, response);
       }else{
         request.getRequestDispatcher("/WEB-INF/login_result_fail.jsp").forward(request, response);
