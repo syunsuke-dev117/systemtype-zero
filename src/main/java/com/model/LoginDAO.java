@@ -13,30 +13,28 @@ public class LoginDAO {
         this.cn = cn;
     }
 
-    // ログイン照会する際の処理
-    public LoginUser login(int loginId, String loginPw) throws SQLException{
-        // ログインユーザの情報を算出
-        String sql = "SELECT instructor_id  , instructor_name, instructor_password FROM instructors WHERE instructor_id = ? AND instructor_password = ?";
-        LoginUser loginUser = null;
+    // アカウントのIDを算出してAccountに情報を格納
+    public Account findLoginId(int loginId, String loginPw) throws SQLException{
+        // IDから情報算出
+        String sql = "SELECT instructor_id  , instructor_name, instructor_password FROM instructors WHERE instructor_id = ?";
+        Account account = null;
 
         /* PreparedStatementの作成
         *  パラメータの設定
            SQL文の実行              */
         try (PreparedStatement stmt = cn.prepareStatement(sql)){
-            // SQL文の「?」にlogin_idとlogin_pwを代入する
+            // SQL文の「?」に代入する
             stmt.setInt(1, loginId);
-            stmt.setString(2, loginPw);
 
             try (ResultSet res = stmt.executeQuery()){
                 // 算出した結果があればLoginUserに値を格納
-                // またこの処理により、データがある際はログイン成功となり、ない場合は失敗となる。
                 if(res.next()){
-                    loginUser = new LoginUser(
-                            res.getInt("instructor_id"),
-                            res.getString("instructor_name"),
-                            res.getString("instructor_password")
+                    account = new Account(
+                            res.getInt(1),
+                            res.getString(2),
+                            res.getString(3)
                     );
-                    return loginUser;
+                    return account;
                 }
             }  
         }
