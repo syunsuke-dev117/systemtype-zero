@@ -4,27 +4,27 @@ import java.io.Serializable;
 
 public class LoginUser implements Serializable{
     // ログイン情報 ID・名前・パスワード
-    private int login_id;
-    private String login_name;
-    private String login_pw;
+    private int loginId;
+    private String loginName;
+    private String loginPw;
 
-    public LoginUser(int login_id, String login_name,String login_pw){
-        this.login_id   = login_id;
-        this.login_name = login_name;
-        this.login_pw   = login_pw;
+    public LoginUser(int loginId, String loginName,String loginPw){
+        this.loginId   = loginId;
+        this.loginName = loginName;
+        this.loginPw   = loginPw;
     }
 
     // IDゲッターメソッド
     public int getLoginId(){
-        return this.login_id;
+        return this.loginId;
     }
     // ネームゲッターメソッド
     public String getLoginName(){
-        return this.login_name;
+        return this.loginName;
     }
     // PWゲッターメソッド   
     public String getLoginPw(){
-        return this.login_pw;
+        return this.loginPw;
     }
 
 }
