@@ -6,12 +6,9 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.sql.Connection;
 import java.sql.SQLException;
 
 import com.model.LoginUser;
-import com.model.ConnectionManager;
-import com.model.LoginDAO;
 import com.model.LoginLogic;
 
 @WebServlet("/Login")
@@ -37,8 +34,7 @@ public class LoginController extends HttpServlet {
     int loginId     = Integer.parseInt(request.getParameter("login_id"));
     String loginPw  = request.getParameter("login_pw");
 
-    // ConnectionManagerを通してDBの接続を取得
-    try(Connection cn = ConnectionManager.getConnection()){
+    try{
 
       // ログイン判定→OKなら値がLoginUserに格納、なければnull
       LoginUser loginUser = new LoginLogic().isLogin(loginId, loginPw);
