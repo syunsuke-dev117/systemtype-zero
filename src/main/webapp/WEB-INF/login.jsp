@@ -24,5 +24,8 @@
   </div>
 </form>
 
+<h1>新規登録</h1>
+<h3><a href="${pageContext.request.contextPath}/AccountCreate">アカウントを作っていない方はこちらから</a></h3>
+
 </body>
 </html>
