@@ -7,7 +7,7 @@ import at.favre.lib.crypto.bcrypt.BCrypt;
 
 public class InstructorCreateLogic {
     // アカウントID
-    private  int account_id;
+    private  int accountId;
 
     // パスワード検証する
     public boolean PasswordVerification(String accountPw, String accountPwVc) throws IllegalArgumentException{
@@ -18,8 +18,8 @@ public class InstructorCreateLogic {
         }
 
         // 値が空
-        if(accountPw.isEmpty() || accountPwVc.isEmpty()){
-            throw new IllegalArgumentException("パスワードまたは確認用パスワードが空値です");
+        if(accountPw.isBlank() || accountPwVc.isBlank()){
+            throw new IllegalArgumentException("パスワードまたは確認用パスワードが空値またはパスワードに余白スペースが入っています");
         }
 
         // 6文字未満 または 13文字以上
@@ -46,8 +46,8 @@ public class InstructorCreateLogic {
             throw new IllegalArgumentException("名前がnullです");
         }
 
-        // 名前が空
-        if(name.isEmpty()){
+        // 名前が空/スペース空白
+        if(name.isBlank()){
             throw new IllegalArgumentException("名前が空値です");
         }
 
@@ -56,12 +56,10 @@ public class InstructorCreateLogic {
 
         try(Connection cn = ConnectionManager.getConnection()){
             // DAOにハッシュを渡す
-            account_id = new InstructorCreateDAO(cn).saveUserInfomation(name, accountPwHash);
-        }catch(SQLException e){
-            e.printStackTrace();
+            accountId = new InstructorCreateDAO(cn).saveUserInfomation(name, accountPwHash);
         }
         
-        return account_id;
+        return accountId;
    }
    
 }
