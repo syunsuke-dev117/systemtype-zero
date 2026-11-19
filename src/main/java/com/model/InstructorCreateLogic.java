@@ -18,8 +18,8 @@ public class InstructorCreateLogic {
         }
 
         // 値が空
-        if(accountPw.isEmpty() || accountPwVc.isEmpty()){
-            throw new IllegalArgumentException("パスワードまたは確認用パスワードが空値です");
+        if(accountPw.isBlank() || accountPwVc.isBlank()){
+            throw new IllegalArgumentException("パスワードまたは確認用パスワードが空値またはパスワードに余白スペースが入っています");
         }
 
         // 6文字未満 または 13文字以上
@@ -46,8 +46,8 @@ public class InstructorCreateLogic {
             throw new IllegalArgumentException("名前がnullです");
         }
 
-        // 名前が空
-        if(name.isEmpty()){
+        // 名前が空/スペース空白
+        if(name.isBlank()){
             throw new IllegalArgumentException("名前が空値です");
         }
 
