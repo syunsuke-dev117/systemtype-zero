@@ -5,7 +5,7 @@ import java.sql.SQLException;
 
 import at.favre.lib.crypto.bcrypt.BCrypt;
 
-public class AccountCreateLogic {
+public class InstructorCreateLogic {
     // アカウントID
     private  int account_id;
 
@@ -45,7 +45,7 @@ public class AccountCreateLogic {
 
         try(Connection cn = ConnectionManager.getConnection()){
             // DAOにハッシュを渡す
-            account_id = new AccountCreateDAO(cn).saveUserInfomation(name, accountPwHash);
+            account_id = new InstructorCreateDAO(cn).saveUserInfomation(name, accountPwHash);
         }catch(SQLException e){
             e.printStackTrace();
         }

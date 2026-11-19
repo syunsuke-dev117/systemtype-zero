@@ -8,7 +8,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
 
-import com.model.AccountCreateLogic;
+import com.model.InstructorCreateLogic;
 
 @WebServlet("/AccountCreate")
 public class AccountCreateController extends HttpServlet {
@@ -42,7 +42,7 @@ public class AccountCreateController extends HttpServlet {
       try{
 
         // AccountCreateLogicを間に挟んで、確認用パスワードと一致するか検証
-        boolean isPwMatch = new AccountCreateLogic().PasswordVerification(accountPw, accountPwVc);
+        boolean isPwMatch = new InstructorCreateLogic().PasswordVerification(accountPw, accountPwVc);
         // 不一致
         if(!isPwMatch){
           request.setAttribute("msgError", "パスワードが一致しません");
@@ -57,7 +57,7 @@ public class AccountCreateController extends HttpServlet {
         // 一致ならここにくる
         // パスワードをハッシュ化させて、DBに保存する。返り値は識別ID
       try{
-          int account_id = new AccountCreateLogic().passwordHash(account_name, accountPw);
+          int account_id = new InstructorCreateLogic().passwordHash(account_name, accountPw);
 
           if(account_id != -1){
             request.setAttribute("account_id", account_id);

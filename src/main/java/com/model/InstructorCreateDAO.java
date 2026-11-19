@@ -5,12 +5,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class AccountCreateDAO {
+public class InstructorCreateDAO {
     // DB接続時に必要なConnectionを宣言
     private Connection cn;
     private int autoIncrementKey;
 
-    public AccountCreateDAO(Connection cn){
+    public InstructorCreateDAO(Connection cn){
         this.cn = cn;
     }
 
