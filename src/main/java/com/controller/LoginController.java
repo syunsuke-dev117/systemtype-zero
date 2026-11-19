@@ -45,11 +45,13 @@ public class LoginController extends HttpServlet {
         request.getRequestDispatcher("/WEB-INF/login_result_success.jsp").forward(request, response);
       }else{
         request.getRequestDispatcher("/WEB-INF/login_result_fail.jsp").forward(request, response);
+        return;
       }
     }catch(SQLException e){
       e.printStackTrace();
       // View側にエラーを返す
       response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+      return;
     }
 
   }

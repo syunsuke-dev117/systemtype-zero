@@ -47,11 +47,13 @@ public class AccountCreateController extends HttpServlet {
         if(!isPwMatch){
           request.setAttribute("msgError", "パスワードが一致しません");
           request.getRequestDispatcher("/WEB-INF/account_create.jsp").forward(request, response);
+          return;
         }
 
       }catch(IllegalArgumentException e){
         request.setAttribute("msgError", e.getMessage());
         request.getRequestDispatcher("/WEB-INF/account_create.jsp").forward(request, response);
+        return;
       }
 
         // 一致ならここにくる
@@ -64,12 +66,14 @@ public class AccountCreateController extends HttpServlet {
             request.getRequestDispatcher("/WEB-INF/account_create_success.jsp").forward(request, response);
           }else{
             request.getRequestDispatcher("/WEB-INF/account_create_fail.jsp").forward(request, response);
+            return;
           }
       }catch(SQLException e){
           // SQLエラー関連はログに詳細を記したい
           e.printStackTrace();
           // ブラウザ側は500エラーと表示
           response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+          return;
       }
 
     }else{
