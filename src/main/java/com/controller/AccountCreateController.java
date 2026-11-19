@@ -48,6 +48,10 @@ public class AccountCreateController extends HttpServlet {
           request.getRequestDispatcher("/WEB-INF/account_create.jsp").forward(request, response);
         }
 
+        // 一致ならここにくる
+        // DAOに名前とパスワードを渡し、ハッシュ化させてDBに保存する
+
+
       }catch(IllegalArgumentException e){
         request.setAttribute("msgError", e.getMessage());
         request.getRequestDispatcher("/WEB-INF/account_create.jsp").forward(request, response);
