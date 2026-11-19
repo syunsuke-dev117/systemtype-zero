@@ -7,7 +7,7 @@ import at.favre.lib.crypto.bcrypt.BCrypt;
 
 public class InstructorCreateLogic {
     // アカウントID
-    private  int account_id;
+    private  int accountId;
 
     // パスワード検証する
     public boolean PasswordVerification(String accountPw, String accountPwVc) throws IllegalArgumentException{
@@ -56,12 +56,10 @@ public class InstructorCreateLogic {
 
         try(Connection cn = ConnectionManager.getConnection()){
             // DAOにハッシュを渡す
-            account_id = new InstructorCreateDAO(cn).saveUserInfomation(name, accountPwHash);
-        }catch(SQLException e){
-            e.printStackTrace();
+            accountId = new InstructorCreateDAO(cn).saveUserInfomation(name, accountPwHash);
         }
         
-        return account_id;
+        return accountId;
    }
    
 }
