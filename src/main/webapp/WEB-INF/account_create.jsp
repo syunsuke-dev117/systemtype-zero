@@ -24,17 +24,18 @@
   
   <div>
     <label>名前</label>
-    <input type="text" name="name" required>
+    <input type="text" name="name">
   </div>
   <div>
     <label>パスワード</label>
-    <p>※ パスワードは6文字以上12文字以下で入力してください</p>
-    <input type="text" name="login_pw" required>
+    <input type="text" name="login_pw">
   </div>
   <div>
     <label>確認用パスワード</label>
-    <input type="text" name="login_pw_vc" required>
+    <input type="text" name="login_pw_vc">
   </div>
+  ※ パスワードは6文字以上12文字以下で入力してください
+  <p>${msgError}</p>
 
   <div>
     <input type="submit" value="作成">

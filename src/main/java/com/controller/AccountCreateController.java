@@ -8,8 +8,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
 
-import com.model.LoginUser;
-import com.model.LoginLogic;
+import com.model.AccountCreateLogic;
 
 @WebServlet("/AccountCreate")
 public class AccountCreateController extends HttpServlet {
@@ -30,36 +29,34 @@ public class AccountCreateController extends HttpServlet {
   @Override 
   protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException , IOException {
     request.setCharacterEncoding("UTF-8");
-    // ブラウザからのユーザ識別・ログインID・パスワードの値を取得する
+    // ブラウザからのユーザ識別値・パスワード/確認用パスワードを取得する
     String user  = request.getParameter("user");
+    String loginPw  = request.getParameter("login_pw");
+    String loginPwVc = request.getParameter("login_pw_vc");
 
     // ユーザ識別変数 userの中身 から講師 or 研修生を判断する
     // 比較の際はオブジェクトの住所じゃなく中身の判断なのでequals()を使う
     if("instructor".equals(user)){
+
+      try{
+
+        // AccountCreateLogicを間に挟んで、確認用パスワードと一致するか検証
+        boolean isPwMatch = new AccountCreateLogic().PasswordVerification(loginPw, loginPwVc);
+        // 不一致
+        if(!isPwMatch){
+          request.setAttribute("msgError", "パスワードが一致しません");
+          request.getRequestDispatcher("/WEB-INF/account_create.jsp").forward(request, response);
+        }
+
+      }catch(IllegalArgumentException e){
+        request.setAttribute("msgError", e.getMessage());
+        request.getRequestDispatcher("/WEB-INF/account_create.jsp").forward(request, response);
+      }
+
       // InstractorAccountDAOに値を渡す
-      // その前にAccountCreateLogicを間に挟んで、確認用パスワードと一致するか検証
-      
 
     }else{
       // TraineeAccountDAOに値を渡す
-    }
-
-
-    try{
-
-      
-
-      if(loginUser != null){
-        // 値を次のjspに引き渡す
-        request.setAttribute("login_name", loginUser.getLoginName());
-        request.getRequestDispatcher("/WEB-INF/login_result_success.jsp").forward(request, response);
-      }else{
-        request.getRequestDispatcher("/WEB-INF/login_result_fail.jsp").forward(request, response);
-      }
-    }catch(SQLException e){
-      e.printStackTrace();
-      // View側にエラーを返す
-      response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
     }
 
   }
