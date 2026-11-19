@@ -6,6 +6,8 @@ import java.sql.SQLException;
 import at.favre.lib.crypto.bcrypt.BCrypt;
 
 public class AccountCreateLogic {
+    // アカウントID
+    private  int account_id;
 
     // パスワード検証する
     public boolean PasswordVerification(String accountPw, String accountPwVc) throws IllegalArgumentException{
@@ -36,38 +38,19 @@ public class AccountCreateLogic {
         return true;
     }
     
-    // アカウントデータ追加
-    public LoginUser accountCreate(int loginId, String loginPw) throws SQLException{
-        
-        try (Connection cn = ConnectionManager.getConnection()){
-            // DAOからIDを取ってくる・IDがあればaccountに値が入ってる
-            Account account = new LoginDAO(cn).findLoginId(loginId);
+   // パスワードをハッシュ化してDAOに渡し、出力後の識別番号をコントローラーに返す
+   public int passwordHash(String name, String accountPw) throws SQLException{
+        // ハッシュ化
+        String accountPwHash = BCrypt.withDefaults().hashToString(12, accountPw.toCharArray());
 
-            // accountに値がなければnull
-            if (account == null){
-                return null;
-            }
-
-            // ハッシュ化専用の外部ライブラリ BCyptを用いる(メソッドチェーン方式)
-            // パスワード照合 (戻り型はBCryptのResult) 照合時にはchar[]にしないといけない
-            BCrypt.Result verificationResult = BCrypt.verifyer().verify(loginPw.toCharArray(), account.getLoginPw().toCharArray());
-
-            // BCrypt.Resultのフィールド verified 戻り値はboolean
-            boolean loginOK = verificationResult.verified;
-    
-            if(!loginOK){
-                return null;
-            }
-
-            // 照合に成功すればここにくる
-            // PWの重要データがないLoginUserに値を渡す
-            // LoginUserはControllerに受け渡したのち、セッションに入る可能性があるため
-            // 仮にセッションにLoginUserを入れてPW情報が入っていた場合
-            // ログ情報などにより抜き取られる危険性がある。その防止策として
-            // セッション渡す際はLoginUserとして、PW情報を持つのはAccountとする
-            return new LoginUser(account.getLoginId(), account.getLoginName());
-
+        try(Connection cn = ConnectionManager.getConnection()){
+            // DAOにハッシュを渡す
+            account_id = new AccountCreateDAO(cn).saveUserInfomation(name, accountPwHash);
+        }catch(SQLException e){
+            e.printStackTrace();
         }
-
-    }
+        
+        return account_id;
+   }
+   
 }

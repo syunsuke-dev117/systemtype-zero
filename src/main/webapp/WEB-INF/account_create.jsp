@@ -24,15 +24,15 @@
   
   <div>
     <label>名前</label>
-    <input type="text" name="name">
+    <input type="text" name="account_name">
   </div>
   <div>
     <label>パスワード</label>
-    <input type="text" name="login_pw">
+    <input type="text" name="account_pw">
   </div>
   <div>
     <label>確認用パスワード</label>
-    <input type="text" name="login_pw_vc">
+    <input type="text" name="account_pw_vc">
   </div>
   ※ パスワードは6文字以上12文字以下で入力してください
   <p>${msgError}</p>
