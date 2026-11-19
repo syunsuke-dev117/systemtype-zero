@@ -30,14 +30,24 @@ public class AccountCreateController extends HttpServlet {
   @Override 
   protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException , IOException {
     request.setCharacterEncoding("UTF-8");
-    // ブラウザからのログインID・パスワードの値を取得する
-    int loginId     = Integer.parseInt(request.getParameter("login_id"));
-    String loginPw  = request.getParameter("login_pw");
+    // ブラウザからのユーザ識別・ログインID・パスワードの値を取得する
+    String user  = request.getParameter("user");
+
+    // ユーザ識別変数 userの中身 から講師 or 研修生を判断する
+    // 比較の際はオブジェクトの住所じゃなく中身の判断なのでequals()を使う
+    if("instructor".equals(user)){
+      // InstractorAccountDAOに値を渡す
+      // その前にAccountCreateLogicを間に挟んで、確認用パスワードと一致するか検証
+      
+
+    }else{
+      // TraineeAccountDAOに値を渡す
+    }
+
 
     try{
 
-      // ログイン判定→OKなら値がLoginUserに格納、なければnull
-      LoginUser loginUser = new LoginLogic().isLogin(loginId, loginPw);
+      
 
       if(loginUser != null){
         // 値を次のjspに引き渡す

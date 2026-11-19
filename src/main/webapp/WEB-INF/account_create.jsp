@@ -23,13 +23,19 @@
   </div>
   
   <div>
-    <label>LoginId</label>
-    <input type="text" name="login_id" required>
+    <label>名前</label>
+    <input type="text" name="name" required>
   </div>
   <div>
-    <label>LoginPw</label>
+    <label>パスワード</label>
+    <p>※ パスワードは6文字以上12文字以下で入力してください</p>
     <input type="text" name="login_pw" required>
   </div>
+  <div>
+    <label>確認用パスワード</label>
+    <input type="text" name="login_pw_vc" required>
+  </div>
+
   <div>
     <input type="submit" value="作成">
   </div>
