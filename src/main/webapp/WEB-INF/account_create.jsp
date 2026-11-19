@@ -17,7 +17,7 @@
   <div>
     <label for="inst">講師</label>
     <input type="radio" id="inst" name="user" value="instructor" checked>
-    
+
     <label for="trai">研修生</label>
     <input type="radio" id="trai" name="user" value="trainee">
   </div>
@@ -31,7 +31,7 @@
     <input type="text" name="login_pw" required>
   </div>
   <div>
-    <input type="submit" value="ログイン">
+    <input type="submit" value="作成">
   </div>
 </form>
 
