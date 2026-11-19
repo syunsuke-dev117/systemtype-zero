@@ -68,6 +68,11 @@ public class AccountCreateController extends HttpServlet {
             request.getRequestDispatcher("/WEB-INF/account_create_fail.jsp").forward(request, response);
             return;
           }
+      }catch(IllegalArgumentException e){
+        request.setAttribute("msgError", e.getMessage());
+        request.getRequestDispatcher("/WEB-INF/account_create.jsp").forward(request, response);
+        return;
+        
       }catch(SQLException e){
           // SQLエラー関連はログに詳細を記したい
           e.printStackTrace();

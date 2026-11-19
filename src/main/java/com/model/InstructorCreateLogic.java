@@ -39,7 +39,18 @@ public class InstructorCreateLogic {
     }
     
    // パスワードをハッシュ化してDAOに渡し、出力後の識別番号をコントローラーに返す
-   public int passwordHash(String name, String accountPw) throws SQLException{
+   public int passwordHash(String name, String accountPw) throws IllegalArgumentException , SQLException{
+
+        // 名前がnull
+        if(name == null){
+            throw new IllegalArgumentException("名前がnullです");
+        }
+
+        // 名前が空
+        if(name.isEmpty()){
+            throw new IllegalArgumentException("名前が空値です");
+        }
+
         // ハッシュ化
         String accountPwHash = BCrypt.withDefaults().hashToString(12, accountPw.toCharArray());
 
