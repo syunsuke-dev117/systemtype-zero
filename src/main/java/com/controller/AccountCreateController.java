@@ -56,13 +56,13 @@ public class AccountCreateController extends HttpServlet {
         return;
       }
 
-        // 一致ならここにくる
-        // パスワードをハッシュ化させて、DBに保存する。返り値は識別ID
+      // 一致ならここにくる
+      // パスワードをハッシュ化させて、DBに保存する。返り値は識別ID
       try{
-          int account_id = new InstructorCreateLogic().passwordHash(account_name, accountPw);
+          int accountId = new InstructorCreateLogic().passwordHash(account_name, accountPw);
 
-          if(account_id != -1){
-            request.setAttribute("account_id", account_id);
+          if(accountId != -1){
+            request.setAttribute("account_id", accountId);
             request.getRequestDispatcher("/WEB-INF/account_create_success.jsp").forward(request, response);
           }else{
             request.getRequestDispatcher("/WEB-INF/account_create_fail.jsp").forward(request, response);
