@@ -14,7 +14,7 @@ public class LoginDAO {
     }
 
     // アカウントのIDを算出してAccountに情報を格納
-    public Account findLoginId(int loginId, String loginPw) throws SQLException{
+    public Account findLoginId(int loginId) throws SQLException{
         // IDから情報算出
         String sql = "SELECT instructor_id  , instructor_name, instructor_password FROM instructors WHERE instructor_id = ?";
         Account account = null;

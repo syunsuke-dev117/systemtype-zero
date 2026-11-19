@@ -12,7 +12,7 @@ public class LoginLogic {
         
         try (Connection cn = ConnectionManager.getConnection()){
             // DAOからIDを取ってくる・IDがあればaccountに値が入ってる
-            Account account = new LoginDAO(cn).findLoginId(loginId, loginPw);
+            Account account = new LoginDAO(cn).findLoginId(loginId);
 
             // accountに値がなければnull
             if (account == null){
