@@ -36,7 +36,7 @@ public class LoginLogic {
             // 仮にセッションにLoginUserを入れてPW情報が入っていた場合
             // ログ情報などにより抜き取られる危険性がある。その防止策として
             // セッション渡す際はLoginUserとして、PW情報を持つのはAccountとする
-            return new LoginUser(loginId, loginPw);
+            return new LoginUser(account.getLoginId(), account.getLoginName());
 
         }
 
