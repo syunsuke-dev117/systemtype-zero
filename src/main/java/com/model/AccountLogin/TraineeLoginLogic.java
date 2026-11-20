@@ -14,7 +14,7 @@ public class TraineeLoginLogic {
         try (Connection cn = ConnectionManager.getConnection()){
             
             // DAOからIDを取ってくる・IDがあればaccountに値が入ってる
-            Account account = new LoginDAO(cn).findLoginId(loginId);
+            Account account = new TraineeLoginDAO(cn).findLoginId(loginId);
 
             // ぬるぽチェック
             Account checkedAccount = cll.nullCheckAccount(account);

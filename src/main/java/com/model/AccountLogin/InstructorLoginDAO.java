@@ -5,11 +5,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class LoginDAO {
+public class InstructorLoginDAO {
     // DB接続時に必要なConnectionを宣言
     private Connection cn;
 
-    public LoginDAO(Connection cn){
+    public InstructorLoginDAO(Connection cn){
         this.cn = cn;
     }
 

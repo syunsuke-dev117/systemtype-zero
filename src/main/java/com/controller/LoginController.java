@@ -8,9 +8,9 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
 
-import com.model.AccountLogin.LoginLogic;
-import com.model.AccountLogin.LoginUser;
+import com.model.AccountLogin.InstructorLoginLogic;
 import com.model.AccountLogin.TraineeLoginLogic;
+import com.model.AccountLogin.LoginUser;
 
 @WebServlet("/Login")
 public class LoginController extends HttpServlet {
@@ -44,7 +44,7 @@ public class LoginController extends HttpServlet {
           try{
 
             // ログイン判定→OKなら値がLoginUserに格納、なければnull
-            LoginUser loginUser = new LoginLogic().isLogin(loginId, loginPw);
+            LoginUser loginUser = new InstructorLoginLogic().isLogin(loginId, loginPw);
 
             if(loginUser != null){
               // 値を次のjspに引き渡す
@@ -53,13 +53,16 @@ public class LoginController extends HttpServlet {
             }else{
               request.getRequestDispatcher("/WEB-INF/login_result_fail.jsp").forward(request, response);
               return;
+            }
+          }catch(NullPointerException e){
+            e.printStackTrace();
+            request.setAttribute("msgError", e.getMessage());
+            request.getRequestDispatcher("/WEB-INF/login_result_fail.jsp").forward(request, response);
+          }catch(SQLException e){
+            e.printStackTrace();
+            response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            return;
           }
-        }catch(SQLException e){
-          e.printStackTrace();
-          // View側にエラーを返す
-          response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-          return;
-        }
 
 
       }else{
