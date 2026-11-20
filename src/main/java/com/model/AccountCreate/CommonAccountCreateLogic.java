@@ -34,6 +34,22 @@ public class CommonAccountCreateLogic {
         return true;
     }
 
+    // パスワードハッシュ前の入力チェック
+    public String validateName(String name) throws IllegalArgumentException{
+        
+         // 名前がnull
+        if(name == null){
+            throw new IllegalArgumentException("名前がnullです");
+        }
+
+        // 名前が空/スペース空白
+        if(name.isBlank()){
+            throw new IllegalArgumentException("名前が空値です");
+        }
+
+        return name;
+    }
+
     // パスワードハッシュ化
     public String PasswordHash(String accountPw){
 
