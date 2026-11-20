@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 
 import com.model.InstructorCreateLogic;
+import com.model.TraineeCreateLogic;
 
 @WebServlet("/AccountCreate")
 public class AccountCreateController extends HttpServlet {
@@ -82,7 +83,49 @@ public class AccountCreateController extends HttpServlet {
       }
 
     }else{
-      // TraineeAccountDAOに値を渡す→これは後々(AccountCreateDAOをふたつにわけるかも)
+
+      try{
+
+        // TraineeCreateLogicを間に挟んで、確認用パスワードと一致するか検証
+        boolean isPwMatch = new TraineeCreateLogic().PasswordVerification(accountPw, accountPwVc);
+        // 不一致
+        if(!isPwMatch){
+          request.setAttribute("msgError", "パスワードが一致しません");
+          request.getRequestDispatcher("/WEB-INF/account_create.jsp").forward(request, response);
+          return;
+        }
+
+      }catch(IllegalArgumentException e){
+        request.setAttribute("msgError", e.getMessage());
+        request.getRequestDispatcher("/WEB-INF/account_create.jsp").forward(request, response);
+        return;
+      }
+
+      // 一致ならここにくる
+      // パスワードをハッシュ化させて、DBに保存する。返り値は識別ID
+      try{
+          int accountId = new TraineeCreateLogic().passwordHash(account_name, accountPw);
+
+          if(accountId != -1){
+            request.setAttribute("account_id", accountId);
+            request.getRequestDispatcher("/WEB-INF/account_create_success.jsp").forward(request, response);
+          }else{
+            request.getRequestDispatcher("/WEB-INF/account_create_fail.jsp").forward(request, response);
+            return;
+          }
+      }catch(IllegalArgumentException e){
+        request.setAttribute("msgError", e.getMessage());
+        request.getRequestDispatcher("/WEB-INF/account_create.jsp").forward(request, response);
+        return;
+        
+      }catch(SQLException e){
+          // SQLエラー関連はログに詳細を記したい
+          e.printStackTrace();
+          // ブラウザ側は500エラーと表示
+          response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+          return;
+      }
+      
     }
 
   }
