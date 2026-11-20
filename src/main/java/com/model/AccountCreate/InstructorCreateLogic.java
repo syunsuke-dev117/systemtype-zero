@@ -12,10 +12,11 @@ public class InstructorCreateLogic {
         // アカウントID
         int accountId;
 
+        CommonAccountCreateLogic cl = new CommonAccountCreateLogic();
         // 登録する名前に不備がないか確認
-        String checkedName   = new CommonAccountCreateLogic().validateName(name);
+        String checkedName   = cl.validateName(name);
         // ハッシュ化
-        String accountPwHash = new CommonAccountCreateLogic().passwordHash(accountPw);
+        String accountPwHash = cl.passwordHash(accountPw);
 
         try(Connection cn = ConnectionManager.getConnection()){
             // DAOにハッシュを渡す
