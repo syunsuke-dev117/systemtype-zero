@@ -20,7 +20,7 @@
     <label for="trai">研修生</label>
     <input type="radio" id="trai" name="user" value="trainee">
   </div>
-  
+
   <div>
     <label>ログインID</label>
     <input type="text" name="login_id" required>
@@ -33,6 +33,7 @@
     <input type="submit" value="ログイン">
   </div>
 </form>
+<p>${msgError}</p>
 
 <h1>新規登録</h1>
 <h3><a href="${pageContext.request.contextPath}/AccountCreate">アカウントを作っていない方はこちらから</a></h3>

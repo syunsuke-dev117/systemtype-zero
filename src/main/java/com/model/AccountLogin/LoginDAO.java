@@ -18,7 +18,6 @@ public class LoginDAO {
         // IDから情報算出
         String sql = "SELECT instructor_id  , instructor_name, instructor_password FROM instructors WHERE instructor_id = ?";
         Account account = null;
-
         /* PreparedStatementの作成
         *  パラメータの設定
            SQL文の実行              */

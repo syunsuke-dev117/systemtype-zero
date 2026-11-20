@@ -31,18 +31,43 @@ public class LoginController extends HttpServlet {
   @Override 
   protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException , IOException {
     request.setCharacterEncoding("UTF-8");
-    // ブラウザからのログインID・パスワードの値を取得する
-    int loginId     = Integer.parseInt(request.getParameter("login_id"));
-    String loginPw  = request.getParameter("login_pw");
-    String user     = request.getParameter("user");
+
+    try{
+      // ブラウザからのログインID・パスワードの値を取得する
+      int loginId     = Integer.parseInt(request.getParameter("login_id"));
+      String loginPw  = request.getParameter("login_pw");
+      String user     = request.getParameter("user");
     
-    // userの値により、講師か研修生か区別
-    if("instructor".equals(user)){
+      // userの値により、講師か研修生か区別
+      if("instructor".equals(user)){
+
+          try{
+
+            // ログイン判定→OKなら値がLoginUserに格納、なければnull
+            LoginUser loginUser = new LoginLogic().isLogin(loginId, loginPw);
+
+            if(loginUser != null){
+              // 値を次のjspに引き渡す
+              request.setAttribute("login_name", loginUser.getLoginName());
+              request.getRequestDispatcher("/WEB-INF/login_result_success.jsp").forward(request, response);
+            }else{
+              request.getRequestDispatcher("/WEB-INF/login_result_fail.jsp").forward(request, response);
+              return;
+          }
+        }catch(SQLException e){
+          e.printStackTrace();
+          // View側にエラーを返す
+          response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+          return;
+        }
+
+
+      }else{
 
         try{
 
           // ログイン判定→OKなら値がLoginUserに格納、なければnull
-          LoginUser loginUser = new LoginLogic().isLogin(loginId, loginPw);
+          LoginUser loginUser = new TraineeLoginLogic().isLogin(loginId, loginPw);
 
           if(loginUser != null){
             // 値を次のjspに引き渡す
@@ -51,44 +76,24 @@ public class LoginController extends HttpServlet {
           }else{
             request.getRequestDispatcher("/WEB-INF/login_result_fail.jsp").forward(request, response);
             return;
-        }
-      }catch(SQLException e){
-        e.printStackTrace();
-        // View側にエラーを返す
-        response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-        return;
-      }
-
-
-    }else{
-
-      try{
-
-        // ログイン判定→OKなら値がLoginUserに格納、なければnull
-        LoginUser loginUser = new TraineeLoginLogic().isLogin(loginId, loginPw);
-
-        if(loginUser != null){
-          // 値を次のjspに引き渡す
-          request.setAttribute("login_name", loginUser.getLoginName());
-          request.getRequestDispatcher("/WEB-INF/login_result_success.jsp").forward(request, response);
-        }else{
+          }
+        }catch(NullPointerException e){
+          e.printStackTrace();
+          request.setAttribute("msgError", e.getMessage());
           request.getRequestDispatcher("/WEB-INF/login_result_fail.jsp").forward(request, response);
+        }catch(SQLException e){
+          e.printStackTrace();
+          response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
           return;
         }
-      }catch(NullPointerException e){
-         e.printStackTrace();
-        // View側にエラーを返す
-        response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-        return;
-      }catch(SQLException e){
-        e.printStackTrace();
-        // View側にエラーを返す
-        response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-        return;
+
       }
-
+    
+    }catch(NumberFormatException e){
+        request.setAttribute("msgError", "IDは数字で入力してください");
+        request.getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
+        return;
     }
-
   }
 
 }
