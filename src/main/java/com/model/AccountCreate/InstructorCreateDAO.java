@@ -15,7 +15,6 @@ public class InstructorCreateDAO {
 
     // アカウントを作成して、アカウントに応じたIDを返す
     public int saveUserInfomation(String name, String accountHashedPw) throws SQLException{
-         // スレッド割り込み防止のためフィールドにあったものをローカルで宣言
         int autoIncrementKey;
         // 名前とハッシュ化パスワードを保存するSQLを持つ変数
         String insertSql = "INSERT INTO instructors (instructor_name, instructor_password) VALUES (?, ?);";

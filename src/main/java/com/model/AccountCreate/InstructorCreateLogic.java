@@ -7,7 +7,7 @@ import com.model.ConnectionManager;
 
 public class InstructorCreateLogic {
 
-    // 入力値の名前のチェック・パスワードの検証・それらをクリアしたら登録する
+    // 入力値の名前のチェック/パスワードハッシュ化をおこない、そのあと情報を登録する
     public int registerAccount(String name, String accountPw) throws IllegalArgumentException , SQLException{
         // アカウントID
         int accountId;
