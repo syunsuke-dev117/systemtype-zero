@@ -14,6 +14,8 @@ import com.model.AccountCreate.TraineeCreateLogic;
 
 @WebServlet("/AccountCreate")
 public class AccountCreateController extends HttpServlet {
+  // 使いまわすオブジェ生成はここでおこなう
+  private CommonAccountCreateLogic cl = new CommonAccountCreateLogic();
 
   @Override
   protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException , IOException {
@@ -44,7 +46,7 @@ public class AccountCreateController extends HttpServlet {
       try{
 
         // AccountCreateLogicを間に挟んで、確認用パスワードと一致するか検証
-        boolean isPwMatch = new CommonAccountCreateLogic().validatePassword(accountPw, accountPwVc);
+        boolean isPwMatch = cl.validatePassword(accountPw, accountPwVc);
         // 不一致
         if(!isPwMatch){
           request.setAttribute("msgError", "パスワードが一致しません");
@@ -88,7 +90,7 @@ public class AccountCreateController extends HttpServlet {
       try{
 
         // TraineeCreateLogicを間に挟んで、確認用パスワードと一致するか検証
-        boolean isPwMatch = new CommonAccountCreateLogic().validatePassword(accountPw, accountPwVc);
+        boolean isPwMatch = cl.validatePassword(accountPw, accountPwVc);
         // 不一致
         if(!isPwMatch){
           request.setAttribute("msgError", "パスワードが一致しません");
