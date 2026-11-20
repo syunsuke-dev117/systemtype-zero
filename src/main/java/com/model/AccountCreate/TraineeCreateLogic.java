@@ -7,7 +7,7 @@ import com.model.ConnectionManager;
 
 public class TraineeCreateLogic {
     
-    // パスワードをハッシュ化してDAOに渡し、出力後の識別番号をコントローラーに返す
+    // 入力値の名前のチェック・パスワードの検証・それらをクリアしたら登録する
     public int registerAccount(String name, String accountPw) throws IllegalArgumentException , SQLException{
         // アカウントID
         int accountId;

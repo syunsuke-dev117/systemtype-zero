@@ -7,9 +7,8 @@ import com.model.ConnectionManager;
 
 public class InstructorCreateLogic {
 
-    // アカウント登録して識別IDを返す
+    // 入力値の名前のチェック・パスワードの検証・それらをクリアしたら登録する
     public int registerAccount(String name, String accountPw) throws IllegalArgumentException , SQLException{
-        // スレッド割り込み防止のためフィールドにあった変数はローカルに宣言
         // アカウントID
         int accountId;
 
