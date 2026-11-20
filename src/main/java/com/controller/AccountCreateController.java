@@ -8,9 +8,9 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
 
-import com.model.InstructorCreateLogic;
-import com.model.TraineeCreateLogic;
-import com.model.CommonAccountCreateLogic;
+import com.model.AccountCreate.CommonAccountCreateLogic;
+import com.model.AccountCreate.InstructorCreateLogic;
+import com.model.AccountCreate.TraineeCreateLogic;
 
 @WebServlet("/AccountCreate")
 public class AccountCreateController extends HttpServlet {
