@@ -10,6 +10,7 @@ import java.sql.SQLException;
 
 import com.model.AccountLogin.LoginLogic;
 import com.model.AccountLogin.LoginUser;
+import com.model.AccountLogin.TraineeLoginLogic;
 
 @WebServlet("/Login")
 public class LoginController extends HttpServlet {
@@ -33,25 +34,59 @@ public class LoginController extends HttpServlet {
     // ブラウザからのログインID・パスワードの値を取得する
     int loginId     = Integer.parseInt(request.getParameter("login_id"));
     String loginPw  = request.getParameter("login_pw");
+    String user     = request.getParameter("user");
+    
+    // userの値により、講師か研修生か区別
+    if("instructor".equals(user)){
 
-    try{
+        try{
 
-      // ログイン判定→OKなら値がLoginUserに格納、なければnull
-      LoginUser loginUser = new LoginLogic().isLogin(loginId, loginPw);
+          // ログイン判定→OKなら値がLoginUserに格納、なければnull
+          LoginUser loginUser = new LoginLogic().isLogin(loginId, loginPw);
 
-      if(loginUser != null){
-        // 値を次のjspに引き渡す
-        request.setAttribute("login_name", loginUser.getLoginName());
-        request.getRequestDispatcher("/WEB-INF/login_result_success.jsp").forward(request, response);
-      }else{
-        request.getRequestDispatcher("/WEB-INF/login_result_fail.jsp").forward(request, response);
+          if(loginUser != null){
+            // 値を次のjspに引き渡す
+            request.setAttribute("login_name", loginUser.getLoginName());
+            request.getRequestDispatcher("/WEB-INF/login_result_success.jsp").forward(request, response);
+          }else{
+            request.getRequestDispatcher("/WEB-INF/login_result_fail.jsp").forward(request, response);
+            return;
+        }
+      }catch(SQLException e){
+        e.printStackTrace();
+        // View側にエラーを返す
+        response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
         return;
       }
-    }catch(SQLException e){
-      e.printStackTrace();
-      // View側にエラーを返す
-      response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-      return;
+
+
+    }else{
+
+      try{
+
+        // ログイン判定→OKなら値がLoginUserに格納、なければnull
+        LoginUser loginUser = new TraineeLoginLogic().isLogin(loginId, loginPw);
+
+        if(loginUser != null){
+          // 値を次のjspに引き渡す
+          request.setAttribute("login_name", loginUser.getLoginName());
+          request.getRequestDispatcher("/WEB-INF/login_result_success.jsp").forward(request, response);
+        }else{
+          request.getRequestDispatcher("/WEB-INF/login_result_fail.jsp").forward(request, response);
+          return;
+        }
+      }catch(NullPointerException e){
+         e.printStackTrace();
+        // View側にエラーを返す
+        response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+        return;
+      }catch(SQLException e){
+        e.printStackTrace();
+        // View側にエラーを返す
+        response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+        return;
+      }
+
     }
 
   }
