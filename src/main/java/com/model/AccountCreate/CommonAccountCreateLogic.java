@@ -1,13 +1,9 @@
-package com.model;
-
-import java.sql.Connection;
-import java.sql.SQLException;
+package com.model.AccountCreate;
 
 import at.favre.lib.crypto.bcrypt.BCrypt;
 
-public class InstructorCreateLogic {
-    // アカウントID
-    private  int accountId;
+public class CommonAccountCreateLogic {
+    private String passwordHash;
 
     // パスワード検証する
     public boolean PasswordVerification(String accountPw, String accountPwVc) throws IllegalArgumentException{
@@ -37,29 +33,13 @@ public class InstructorCreateLogic {
         // 一致
         return true;
     }
-    
-   // パスワードをハッシュ化してDAOに渡し、出力後の識別番号をコントローラーに返す
-   public int passwordHash(String name, String accountPw) throws IllegalArgumentException , SQLException{
 
-        // 名前がnull
-        if(name == null){
-            throw new IllegalArgumentException("名前がnullです");
-        }
+    // パスワードハッシュ化
+    public String PasswordHash(String accountPw){
 
-        // 名前が空/スペース空白
-        if(name.isBlank()){
-            throw new IllegalArgumentException("名前が空値です");
-        }
+        passwordHash =  BCrypt.withDefaults().hashToString(12, accountPw.toCharArray());
 
-        // ハッシュ化
-        String accountPwHash = BCrypt.withDefaults().hashToString(12, accountPw.toCharArray());
-
-        try(Connection cn = ConnectionManager.getConnection()){
-            // DAOにハッシュを渡す
-            accountId = new InstructorCreateDAO(cn).saveUserInfomation(name, accountPwHash);
-        }
-        
-        return accountId;
-   }
+        return passwordHash;
+    }
    
 }

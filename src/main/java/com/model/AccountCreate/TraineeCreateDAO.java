@@ -1,23 +1,23 @@
-package com.model;
+package com.model.AccountCreate;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class InstructorCreateDAO {
+public class TraineeCreateDAO {
     // DB接続時に必要なConnectionを宣言
     private Connection cn;
     private int autoIncrementKey;
 
-    public InstructorCreateDAO(Connection cn){
+    public TraineeCreateDAO(Connection cn){
         this.cn = cn;
     }
 
     // アカウントを作成して、アカウントに応じたIDを返す
     public int saveUserInfomation(String name, String accountHashedPw) throws SQLException{
         // 名前とハッシュ化パスワードを保存するSQLを持つ変数
-        String insertSql = "INSERT INTO instructors (instructor_name, instructor_password) VALUES (?, ?);";
+        String insertSql = "INSERT INTO trainees (trainee_name, trainee_password) VALUES (?, ?);";
 
         /* PreparedStatementの作成
         *  パラメータの設定

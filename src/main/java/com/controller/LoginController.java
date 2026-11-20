@@ -8,8 +8,8 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
 
-import com.model.LoginUser;
-import com.model.LoginLogic;
+import com.model.AccountLogin.LoginLogic;
+import com.model.AccountLogin.LoginUser;
 
 @WebServlet("/Login")
 public class LoginController extends HttpServlet {

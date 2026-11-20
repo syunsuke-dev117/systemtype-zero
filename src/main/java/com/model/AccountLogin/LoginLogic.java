@@ -1,7 +1,9 @@
-package com.model;
+package com.model.AccountLogin;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+
+import com.model.ConnectionManager;
 
 import at.favre.lib.crypto.bcrypt.BCrypt;
 

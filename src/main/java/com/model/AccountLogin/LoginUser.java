@@ -1,4 +1,4 @@
-package com.model;
+package com.model.AccountLogin;
 
 import java.io.Serializable;
 
