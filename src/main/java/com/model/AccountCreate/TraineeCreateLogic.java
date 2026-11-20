@@ -23,7 +23,7 @@ public class TraineeCreateLogic {
         }
 
         // ハッシュ化
-        String accountPwHash = new CommonAccountCreateLogic().PasswordHash(accountPw);
+        String accountPwHash = new CommonAccountCreateLogic().passwordHash(accountPw);
 
         try(Connection cn = ConnectionManager.getConnection()){
             // DAOにハッシュを渡す

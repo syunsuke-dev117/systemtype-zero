@@ -6,7 +6,7 @@ public class CommonAccountCreateLogic {
     private String passwordHash;
 
     // パスワード検証する
-    public boolean PasswordVerification(String accountPw, String accountPwVc) throws IllegalArgumentException{
+    public boolean passwordVerification(String accountPw, String accountPwVc) throws IllegalArgumentException{
 
         // 値がnull(オブジェクトの住所が無い)
         if(accountPw == null || accountPwVc == null){
@@ -36,7 +36,7 @@ public class CommonAccountCreateLogic {
 
     // パスワードハッシュ前の入力チェック
     public String validateName(String name) throws IllegalArgumentException{
-        
+
          // 名前がnull
         if(name == null){
             throw new IllegalArgumentException("名前がnullです");
@@ -51,7 +51,7 @@ public class CommonAccountCreateLogic {
     }
 
     // パスワードハッシュ化
-    public String PasswordHash(String accountPw){
+    public String passwordHash(String accountPw){
 
         passwordHash =  BCrypt.withDefaults().hashToString(12, accountPw.toCharArray());
 

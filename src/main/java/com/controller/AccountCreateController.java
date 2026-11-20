@@ -44,7 +44,7 @@ public class AccountCreateController extends HttpServlet {
       try{
 
         // AccountCreateLogicを間に挟んで、確認用パスワードと一致するか検証
-        boolean isPwMatch = new CommonAccountCreateLogic().PasswordVerification(accountPw, accountPwVc);
+        boolean isPwMatch = new CommonAccountCreateLogic().passwordVerification(accountPw, accountPwVc);
         // 不一致
         if(!isPwMatch){
           request.setAttribute("msgError", "パスワードが一致しません");
@@ -88,7 +88,7 @@ public class AccountCreateController extends HttpServlet {
       try{
 
         // TraineeCreateLogicを間に挟んで、確認用パスワードと一致するか検証
-        boolean isPwMatch = new CommonAccountCreateLogic().PasswordVerification(accountPw, accountPwVc);
+        boolean isPwMatch = new CommonAccountCreateLogic().passwordVerification(accountPw, accountPwVc);
         // 不一致
         if(!isPwMatch){
           request.setAttribute("msgError", "パスワードが一致しません");
