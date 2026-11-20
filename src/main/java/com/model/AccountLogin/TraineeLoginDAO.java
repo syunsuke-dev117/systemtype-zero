@@ -5,18 +5,18 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class LoginDAO {
+public class TraineeLoginDAO {
     // DB接続時に必要なConnectionを宣言
     private Connection cn;
 
-    public LoginDAO(Connection cn){
+    public TraineeLoginDAO(Connection cn){
         this.cn = cn;
     }
 
     // アカウントのIDを算出してAccountに情報を格納
     public Account findLoginId(int loginId) throws SQLException{
         // IDから情報算出
-        String sql = "SELECT instructor_id  , instructor_name, instructor_password FROM instructors WHERE instructor_id = ?";
+        String sql = "SELECT trainee_id  , trainee_name, trainee_password FROM trainees WHERE trainee_id = ?";
         Account account = null;
 
         /* PreparedStatementの作成
