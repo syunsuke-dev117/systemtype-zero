@@ -3,10 +3,9 @@ package com.model.AccountCreate;
 import at.favre.lib.crypto.bcrypt.BCrypt;
 
 public class CommonAccountCreateLogic {
-    private String passwordHash;
 
     // パスワード検証する
-    public boolean PasswordVerification(String accountPw, String accountPwVc) throws IllegalArgumentException{
+    public boolean validatePassword(String accountPw, String accountPwVc) throws IllegalArgumentException{
 
         // 値がnull(オブジェクトの住所が無い)
         if(accountPw == null || accountPwVc == null){
@@ -34,10 +33,25 @@ public class CommonAccountCreateLogic {
         return true;
     }
 
-    // パスワードハッシュ化
-    public String PasswordHash(String accountPw){
+    // 名前の入力チェック
+    public String validateName(String name) throws IllegalArgumentException{
 
-        passwordHash =  BCrypt.withDefaults().hashToString(12, accountPw.toCharArray());
+         // 名前がnull
+        if(name == null){
+            throw new IllegalArgumentException("名前がnullです");
+        }
+        // 名前が空/スペース空白
+        if(name.isBlank()){
+            throw new IllegalArgumentException("名前が空値です");
+        }
+
+        return name;
+    }
+
+    // パスワードハッシュ化
+    public String passwordHash(String accountPw){
+        
+        String passwordHash =  BCrypt.withDefaults().hashToString(12, accountPw.toCharArray());
 
         return passwordHash;
     }

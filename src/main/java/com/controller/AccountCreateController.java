@@ -14,7 +14,6 @@ import com.model.AccountCreate.TraineeCreateLogic;
 
 @WebServlet("/AccountCreate")
 public class AccountCreateController extends HttpServlet {
-
   @Override
   protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException , IOException {
 
@@ -31,6 +30,9 @@ public class AccountCreateController extends HttpServlet {
   @Override 
   protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException , IOException {
     request.setCharacterEncoding("UTF-8");
+    // 共通クラスのオブジェ生成
+    CommonAccountCreateLogic cl = new CommonAccountCreateLogic();
+
     // ブラウザからのユーザ識別値・名前・パスワード/確認用パスワードを取得する
     String user          = request.getParameter("user");
     String account_name  = request.getParameter("account_name");
@@ -44,7 +46,7 @@ public class AccountCreateController extends HttpServlet {
       try{
 
         // AccountCreateLogicを間に挟んで、確認用パスワードと一致するか検証
-        boolean isPwMatch = new CommonAccountCreateLogic().PasswordVerification(accountPw, accountPwVc);
+        boolean isPwMatch = cl.validatePassword(accountPw, accountPwVc);
         // 不一致
         if(!isPwMatch){
           request.setAttribute("msgError", "パスワードが一致しません");
@@ -61,7 +63,7 @@ public class AccountCreateController extends HttpServlet {
       // 一致ならここにくる
       // パスワードをハッシュ化させて、DBに保存する。返り値は識別ID
       try{
-          int accountId = new InstructorCreateLogic().passwordHash(account_name, accountPw);
+          int accountId = new InstructorCreateLogic().registerAccount(account_name, accountPw);
 
           if(accountId != -1){
             request.setAttribute("account_id", accountId);
@@ -88,7 +90,7 @@ public class AccountCreateController extends HttpServlet {
       try{
 
         // TraineeCreateLogicを間に挟んで、確認用パスワードと一致するか検証
-        boolean isPwMatch = new CommonAccountCreateLogic().PasswordVerification(accountPw, accountPwVc);
+        boolean isPwMatch = cl.validatePassword(accountPw, accountPwVc);
         // 不一致
         if(!isPwMatch){
           request.setAttribute("msgError", "パスワードが一致しません");
@@ -105,7 +107,7 @@ public class AccountCreateController extends HttpServlet {
       // 一致ならここにくる
       // パスワードをハッシュ化させて、DBに保存する。返り値は識別ID
       try{
-          int accountId = new TraineeCreateLogic().passwordHash(account_name, accountPw);
+          int accountId = new TraineeCreateLogic().registerAccount(account_name, accountPw);
 
           if(accountId != -1){
             request.setAttribute("account_id", accountId);

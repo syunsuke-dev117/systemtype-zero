@@ -6,28 +6,21 @@ import java.sql.SQLException;
 import com.model.ConnectionManager;
 
 public class InstructorCreateLogic {
-    // アカウントID
-    private  int accountId;
 
-    // パスワードをハッシュ化してDAOに渡し、出力後の識別番号をコントローラーに返す
-    public int passwordHash(String name, String accountPw) throws IllegalArgumentException , SQLException{
+    // 入力値の名前のチェック/パスワードハッシュ化をおこない、そのあと情報を登録する
+    public int registerAccount(String name, String accountPw) throws IllegalArgumentException , SQLException{
+        // アカウントID
+        int accountId;
 
-        // 名前がnull
-        if(name == null){
-            throw new IllegalArgumentException("名前がnullです");
-        }
-
-        // 名前が空/スペース空白
-        if(name.isBlank()){
-            throw new IllegalArgumentException("名前が空値です");
-        }
-
+        CommonAccountCreateLogic cl = new CommonAccountCreateLogic();
+        // 登録する名前に不備がないか確認
+        String checkedName   = cl.validateName(name);
         // ハッシュ化
-        String accountPwHash = new CommonAccountCreateLogic().PasswordHash(accountPw);
+        String accountPwHash = cl.passwordHash(accountPw);
 
         try(Connection cn = ConnectionManager.getConnection()){
             // DAOにハッシュを渡す
-            accountId = new InstructorCreateDAO(cn).saveUserInfomation(name, accountPwHash);
+            accountId = new InstructorCreateDAO(cn).saveUserInfomation(checkedName, accountPwHash);
         }
         
         return accountId;
