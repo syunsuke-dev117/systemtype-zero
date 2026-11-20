@@ -1,11 +1,10 @@
 package com.model;
 
-import java.sql.Connection;
-import java.sql.SQLException;
-
 import at.favre.lib.crypto.bcrypt.BCrypt;
 
 public class CommonAccountCreateLogic {
+    private String passwordHash;
+
     // パスワード検証する
     public boolean PasswordVerification(String accountPw, String accountPwVc) throws IllegalArgumentException{
 
@@ -33,6 +32,14 @@ public class CommonAccountCreateLogic {
 
         // 一致
         return true;
+    }
+
+    // パスワードハッシュ化
+    public String PasswordHash(String accountPw){
+
+        passwordHash =  BCrypt.withDefaults().hashToString(12, accountPw.toCharArray());
+
+        return passwordHash;
     }
    
 }

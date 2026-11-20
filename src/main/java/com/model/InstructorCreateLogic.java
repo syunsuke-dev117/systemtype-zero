@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 
 import at.favre.lib.crypto.bcrypt.BCrypt;
+import com.model.CommonAccountCreateLogic;
 
 public class InstructorCreateLogic {
     // アカウントID
@@ -23,7 +24,7 @@ public class InstructorCreateLogic {
         }
 
         // ハッシュ化
-        String accountPwHash = BCrypt.withDefaults().hashToString(12, accountPw.toCharArray());
+        String accountPwHash = new CommonAccountCreateLogic().PasswordHash(accountPw);
 
         try(Connection cn = ConnectionManager.getConnection()){
             // DAOにハッシュを渡す
