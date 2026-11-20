@@ -10,6 +10,7 @@ import java.sql.SQLException;
 
 import com.model.InstructorCreateLogic;
 import com.model.TraineeCreateLogic;
+import com.model.CommonAccountCreateLogic;
 
 @WebServlet("/AccountCreate")
 public class AccountCreateController extends HttpServlet {
@@ -43,7 +44,7 @@ public class AccountCreateController extends HttpServlet {
       try{
 
         // AccountCreateLogicを間に挟んで、確認用パスワードと一致するか検証
-        boolean isPwMatch = new InstructorCreateLogic().PasswordVerification(accountPw, accountPwVc);
+        boolean isPwMatch = new CommonAccountCreateLogic().PasswordVerification(accountPw, accountPwVc);
         // 不一致
         if(!isPwMatch){
           request.setAttribute("msgError", "パスワードが一致しません");
@@ -87,7 +88,7 @@ public class AccountCreateController extends HttpServlet {
       try{
 
         // TraineeCreateLogicを間に挟んで、確認用パスワードと一致するか検証
-        boolean isPwMatch = new TraineeCreateLogic().PasswordVerification(accountPw, accountPwVc);
+        boolean isPwMatch = new CommonAccountCreateLogic().PasswordVerification(accountPw, accountPwVc);
         // 不一致
         if(!isPwMatch){
           request.setAttribute("msgError", "パスワードが一致しません");
