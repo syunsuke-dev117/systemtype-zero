@@ -3,7 +3,6 @@ package com.model.AccountCreate;
 import at.favre.lib.crypto.bcrypt.BCrypt;
 
 public class CommonAccountCreateLogic {
-    private String passwordHash;
 
     // パスワード検証する
     public boolean validatePassword(String accountPw, String accountPwVc) throws IllegalArgumentException{
@@ -51,8 +50,8 @@ public class CommonAccountCreateLogic {
 
     // パスワードハッシュ化
     public String passwordHash(String accountPw){
-
-        passwordHash =  BCrypt.withDefaults().hashToString(12, accountPw.toCharArray());
+        
+        String passwordHash =  BCrypt.withDefaults().hashToString(12, accountPw.toCharArray());
 
         return passwordHash;
     }

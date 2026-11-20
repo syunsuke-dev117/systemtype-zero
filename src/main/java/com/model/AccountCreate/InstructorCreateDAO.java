@@ -8,7 +8,6 @@ import java.sql.SQLException;
 public class InstructorCreateDAO {
     // DB接続時に必要なConnectionを宣言
     private Connection cn;
-    private int autoIncrementKey;
 
     public InstructorCreateDAO(Connection cn){
         this.cn = cn;
@@ -16,6 +15,8 @@ public class InstructorCreateDAO {
 
     // アカウントを作成して、アカウントに応じたIDを返す
     public int saveUserInfomation(String name, String accountHashedPw) throws SQLException{
+         // スレッド割り込み防止のためフィールドにあったものをローカルで宣言
+        int autoIncrementKey;
         // 名前とハッシュ化パスワードを保存するSQLを持つ変数
         String insertSql = "INSERT INTO instructors (instructor_name, instructor_password) VALUES (?, ?);";
 
@@ -33,11 +34,12 @@ public class InstructorCreateDAO {
             try(ResultSet rs = stmt.getGeneratedKeys()){
                 if(rs.next()){
                     autoIncrementKey = rs.getInt(1);
+                    return autoIncrementKey;
                 }
             }
     
         }
         
-        return autoIncrementKey;
+        return 0;
     }
 }

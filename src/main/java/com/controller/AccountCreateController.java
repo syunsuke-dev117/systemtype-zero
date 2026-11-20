@@ -14,9 +14,6 @@ import com.model.AccountCreate.TraineeCreateLogic;
 
 @WebServlet("/AccountCreate")
 public class AccountCreateController extends HttpServlet {
-  // 使いまわすオブジェ生成はここでおこなう
-  private CommonAccountCreateLogic cl = new CommonAccountCreateLogic();
-
   @Override
   protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException , IOException {
 
@@ -33,6 +30,9 @@ public class AccountCreateController extends HttpServlet {
   @Override 
   protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException , IOException {
     request.setCharacterEncoding("UTF-8");
+    // 共通クラスのオブジェ生成
+    CommonAccountCreateLogic cl = new CommonAccountCreateLogic();
+
     // ブラウザからのユーザ識別値・名前・パスワード/確認用パスワードを取得する
     String user          = request.getParameter("user");
     String account_name  = request.getParameter("account_name");
