@@ -1,4 +1,4 @@
-package com.model;
+package com.model.AccountCreate;
 
 import at.favre.lib.crypto.bcrypt.BCrypt;
 

@@ -1,10 +1,12 @@
-package com.model;
+package com.model.AccountCreate;
 
 import java.sql.Connection;
 import java.sql.SQLException;
 
+import com.model.ConnectionManager;
+import com.model.AccountCreate.CommonAccountCreateLogic;
+
 import at.favre.lib.crypto.bcrypt.BCrypt;
-import com.model.CommonAccountCreateLogic;
 
 public class InstructorCreateLogic {
     // アカウントID
