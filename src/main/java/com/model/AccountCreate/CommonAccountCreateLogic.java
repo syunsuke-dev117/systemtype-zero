@@ -34,7 +34,7 @@ public class CommonAccountCreateLogic {
         return true;
     }
 
-    // パスワードハッシュ前の入力チェック
+    // 名前の入力チェック
     public String validateName(String name) throws IllegalArgumentException{
 
          // 名前がnull

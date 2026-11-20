@@ -61,7 +61,7 @@ public class AccountCreateController extends HttpServlet {
       // 一致ならここにくる
       // パスワードをハッシュ化させて、DBに保存する。返り値は識別ID
       try{
-          int accountId = new InstructorCreateLogic().accountRegister(account_name, accountPw);
+          int accountId = new InstructorCreateLogic().registerAccount(account_name, accountPw);
 
           if(accountId != -1){
             request.setAttribute("account_id", accountId);
@@ -105,7 +105,7 @@ public class AccountCreateController extends HttpServlet {
       // 一致ならここにくる
       // パスワードをハッシュ化させて、DBに保存する。返り値は識別ID
       try{
-          int accountId = new TraineeCreateLogic().accountRegister(account_name, accountPw);
+          int accountId = new TraineeCreateLogic().registerAccount(account_name, accountPw);
 
           if(accountId != -1){
             request.setAttribute("account_id", accountId);
