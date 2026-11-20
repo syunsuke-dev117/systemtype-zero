@@ -4,9 +4,6 @@ import java.sql.Connection;
 import java.sql.SQLException;
 
 import com.model.ConnectionManager;
-import com.model.AccountCreate.CommonAccountCreateLogic;
-
-import at.favre.lib.crypto.bcrypt.BCrypt;
 
 public class InstructorCreateLogic {
     // アカウントID
