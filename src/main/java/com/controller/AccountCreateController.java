@@ -44,7 +44,7 @@ public class AccountCreateController extends HttpServlet {
       try{
 
         // AccountCreateLogicを間に挟んで、確認用パスワードと一致するか検証
-        boolean isPwMatch = new CommonAccountCreateLogic().passwordVerification(accountPw, accountPwVc);
+        boolean isPwMatch = new CommonAccountCreateLogic().validatePassword(accountPw, accountPwVc);
         // 不一致
         if(!isPwMatch){
           request.setAttribute("msgError", "パスワードが一致しません");
@@ -61,7 +61,7 @@ public class AccountCreateController extends HttpServlet {
       // 一致ならここにくる
       // パスワードをハッシュ化させて、DBに保存する。返り値は識別ID
       try{
-          int accountId = new InstructorCreateLogic().passwordHash(account_name, accountPw);
+          int accountId = new InstructorCreateLogic().accountRegister(account_name, accountPw);
 
           if(accountId != -1){
             request.setAttribute("account_id", accountId);
@@ -88,7 +88,7 @@ public class AccountCreateController extends HttpServlet {
       try{
 
         // TraineeCreateLogicを間に挟んで、確認用パスワードと一致するか検証
-        boolean isPwMatch = new CommonAccountCreateLogic().passwordVerification(accountPw, accountPwVc);
+        boolean isPwMatch = new CommonAccountCreateLogic().validatePassword(accountPw, accountPwVc);
         // 不一致
         if(!isPwMatch){
           request.setAttribute("msgError", "パスワードが一致しません");
@@ -105,7 +105,7 @@ public class AccountCreateController extends HttpServlet {
       // 一致ならここにくる
       // パスワードをハッシュ化させて、DBに保存する。返り値は識別ID
       try{
-          int accountId = new TraineeCreateLogic().passwordHash(account_name, accountPw);
+          int accountId = new TraineeCreateLogic().accountRegister(account_name, accountPw);
 
           if(accountId != -1){
             request.setAttribute("account_id", accountId);

@@ -6,7 +6,7 @@ public class CommonAccountCreateLogic {
     private String passwordHash;
 
     // パスワード検証する
-    public boolean passwordVerification(String accountPw, String accountPwVc) throws IllegalArgumentException{
+    public boolean validatePassword(String accountPw, String accountPwVc) throws IllegalArgumentException{
 
         // 値がnull(オブジェクトの住所が無い)
         if(accountPw == null || accountPwVc == null){

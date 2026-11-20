@@ -10,7 +10,7 @@ public class InstructorCreateLogic {
     private  int accountId;
 
     // パスワードをハッシュ化してDAOに渡し、出力後の識別番号をコントローラーに返す
-    public int passwordHash(String name, String accountPw) throws IllegalArgumentException , SQLException{
+    public int accountRegister(String name, String accountPw) throws IllegalArgumentException , SQLException{
         
         // 登録する名前に不備がないか確認
         String checkedName   = new CommonAccountCreateLogic().validateName(name);
