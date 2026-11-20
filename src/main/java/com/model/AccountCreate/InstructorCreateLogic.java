@@ -11,13 +11,15 @@ public class InstructorCreateLogic {
 
     // パスワードをハッシュ化してDAOに渡し、出力後の識別番号をコントローラーに返す
     public int passwordHash(String name, String accountPw) throws IllegalArgumentException , SQLException{
-
+        
+        // 登録する名前に不備がないか確認
+        String checkedName   = new CommonAccountCreateLogic().validateName(name);
         // ハッシュ化
         String accountPwHash = new CommonAccountCreateLogic().passwordHash(accountPw);
 
         try(Connection cn = ConnectionManager.getConnection()){
             // DAOにハッシュを渡す
-            accountId = new InstructorCreateDAO(cn).saveUserInfomation(name, accountPwHash);
+            accountId = new InstructorCreateDAO(cn).saveUserInfomation(checkedName, accountPwHash);
         }
         
         return accountId;

@@ -41,7 +41,6 @@ public class CommonAccountCreateLogic {
         if(name == null){
             throw new IllegalArgumentException("名前がnullです");
         }
-
         // 名前が空/スペース空白
         if(name.isBlank()){
             throw new IllegalArgumentException("名前が空値です");
