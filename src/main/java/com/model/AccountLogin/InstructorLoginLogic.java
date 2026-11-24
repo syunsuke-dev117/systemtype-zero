@@ -16,6 +16,10 @@ public class InstructorLoginLogic {
             // DAOからIDを取ってくる・IDがあればaccountに値が入ってる
             Account account = new InstructorLoginDAO(cn).findLoginId(loginId);
 
+            if(account == null){
+                return null;
+            }
+
             // ハッシュ化専用の外部ライブラリ BCyptを用いる(メソッドチェーン方式)
             // パスワード照合
             boolean result = cll.verificationPassword(loginPw, account);    
