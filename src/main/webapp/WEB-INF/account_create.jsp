@@ -1,4 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -11,7 +12,7 @@
 <h1>新規登録ページ</h1>
 
 <!-- 新規登録にいたって、ラジオボタンで講師と研修生で区別する -->
-<form action="${pageContext.request.contextPath}/AccountCreate" method="post">
+<form action="<c:url value='/AccountCreate' />" method="post">
 
   <label>あなたはどちらですか？</label>
   <div>
