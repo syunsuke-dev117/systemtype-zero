@@ -93,7 +93,7 @@ public class LoginController extends HttpServlet {
       }else{
         // F12開発ツールから値を書き換えられた場合の対処
         // 普通のケースだと起きないが、一応対策として書いておく
-        request.setAttribute("msgError", "講師か研修生を選択してください");
+        request.setAttribute("msgError", "講師か研修生を選択してください。またF12キーによる値の置き換えはしないでください。");
         request.getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
       }
     

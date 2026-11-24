@@ -85,7 +85,7 @@ public class AccountCreateController extends HttpServlet {
           return;
       }
 
-    }else{
+    }else if("trainee".equals(user)){
 
       try{
 
@@ -129,6 +129,11 @@ public class AccountCreateController extends HttpServlet {
           return;
       }
       
+    }else{
+        // F12開発ツールから値を書き換えられた場合の対処
+        // 普通のケースだと起きないが、一応対策として書いておく
+        request.setAttribute("msgError", "講師か研修生を選択してください");
+        request.getRequestDispatcher("/WEB-INF/account_create.jsp").forward(request, response);
     }
 
   }
