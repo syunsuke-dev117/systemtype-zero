@@ -36,7 +36,7 @@
     <input type="text" name="account_pw_vc">
   </div>
   ※ パスワードは6文字以上12文字以下で入力してください
-  <p>${msgError}</p>
+  <p><c:out value='${msgError}' /></p>
 
   <div>
     <input type="submit" value="作成">

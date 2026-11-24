@@ -9,7 +9,7 @@
 </head>
 <body>
   <h1>アカウント作成が完了しました</h1>
-  <h2>あなたのアカウントIDは「${account_id}」番です。</n>メモか何かに控えておいてください。</h2>
+  <h2>あなたのアカウントIDは「<c:out value='${account_id}' />」番です。</n>メモか何かに控えておいてください。</h2>
   <h3><a href="<c:url value='/Login' />">ログインページ</a></h3>
 </body>
 </html>
