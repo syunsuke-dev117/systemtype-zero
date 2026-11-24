@@ -5,6 +5,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.SQLException;
 
@@ -47,8 +48,12 @@ public class LoginController extends HttpServlet {
             LoginUser loginUser = new InstructorLoginLogic().isLogin(loginId, loginPw);
 
             if(loginUser != null){
-              // 値を次のjspに引き渡す
-              request.setAttribute("login_name", loginUser.getLoginName());
+              // セッションID作成
+              request.changeSessionId();
+              // ログインの情報をセッションに保存する
+              HttpSession session = request.getSession();
+              session.setAttribute("loginUser", loginUser);
+
               request.getRequestDispatcher("/WEB-INF/login_result_success.jsp").forward(request, response);
             }else{
               request.getRequestDispatcher("/WEB-INF/login_result_fail.jsp").forward(request, response);
@@ -69,8 +74,11 @@ public class LoginController extends HttpServlet {
           LoginUser loginUser = new TraineeLoginLogic().isLogin(loginId, loginPw);
 
           if(loginUser != null){
-            // 値を次のjspに引き渡す
-            request.setAttribute("login_name", loginUser.getLoginName());
+            // セッションID作成
+            request.changeSessionId();
+            // ログインの情報をセッションに保存する
+            HttpSession session = request.getSession();
+            session.setAttribute("loginUser", loginUser);
             request.getRequestDispatcher("/WEB-INF/login_result_success.jsp").forward(request, response);
           }else{
             request.getRequestDispatcher("/WEB-INF/login_result_fail.jsp").forward(request, response);

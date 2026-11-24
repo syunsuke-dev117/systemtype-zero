@@ -1,4 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -9,6 +10,6 @@
 <body>
   <h1>アカウント作成に失敗しました</h1>
   <h2>もう一度、作成画面からやり直してください</h2>
-  <h3><a href="${pageContext.request.contextPath}/AccountCreate">ログインページ</a></h3>
+  <h3><a href="<c:url value='/AccountCreate' />">アカウント作成ページ</a></h3>
 </body>
 </html>

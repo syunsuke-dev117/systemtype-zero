@@ -1,4 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -8,6 +9,6 @@
 </head>
 <body>
   <h1>メインページ</h1>
-  <h2>こんにちは。${login_name}さん</h2>
+  <h2>こんにちは。<c:out value="${sessionScope.loginUser.loginName}" />さん</h2>
 </body>
 </html>

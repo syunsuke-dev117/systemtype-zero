@@ -1,4 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -9,6 +10,6 @@
 <body>
   <h1>IDまたはパスワードが違います</h1>
   <h2>下記リンクからログイン画面にお戻りください</h2>
-  <h3><a href="${pageContext.request.contextPath}/Login">ログインページ</a></h3>
+  <h3><a href="<c:url value='/Login' />">ログインページ</a></h3>
 </body>
 </html>

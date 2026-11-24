@@ -1,4 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -11,7 +12,7 @@
 <h1>新規登録ページ</h1>
 
 <!-- 新規登録にいたって、ラジオボタンで講師と研修生で区別する -->
-<form action="${pageContext.request.contextPath}/AccountCreate" method="post">
+<form action="<c:url value='/AccountCreate' />" method="post">
 
   <label>あなたはどちらですか？</label>
   <div>
@@ -35,7 +36,7 @@
     <input type="text" name="account_pw_vc">
   </div>
   ※ パスワードは6文字以上12文字以下で入力してください
-  <p>${msgError}</p>
+  <p><c:out value='${msgError}' /></p>
 
   <div>
     <input type="submit" value="作成">

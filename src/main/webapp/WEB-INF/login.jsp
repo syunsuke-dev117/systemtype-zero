@@ -1,4 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -10,7 +11,7 @@
 
 <h1>ログインページ</h1>
 
-<form action="${pageContext.request.contextPath}/Login" method="post">
+<form action="<c:url value='/Login' />" method="post">
 
   <label>あなたはどちらですか？</label>
   <div>
@@ -33,10 +34,10 @@
     <input type="submit" value="ログイン">
   </div>
 </form>
-<p>${msgError}</p>
+<p><c:out value="${msgError}" /></p>
 
 <h1>新規登録</h1>
-<h3><a href="${pageContext.request.contextPath}/AccountCreate">アカウントを作っていない方はこちらから</a></h3>
+<h3><a href="<c:url value='/AccountCreate' />">アカウントを作っていない方はこちらから</a></h3>
 
 </body>
 </html>
