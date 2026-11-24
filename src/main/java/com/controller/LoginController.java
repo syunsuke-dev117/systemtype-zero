@@ -54,10 +54,6 @@ public class LoginController extends HttpServlet {
               request.getRequestDispatcher("/WEB-INF/login_result_fail.jsp").forward(request, response);
               return;
             }
-          }catch(NullPointerException e){
-            e.printStackTrace();
-            request.setAttribute("msgError", e.getMessage());
-            request.getRequestDispatcher("/WEB-INF/login_result_fail.jsp").forward(request, response);
           }catch(SQLException e){
             e.printStackTrace();
             response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
@@ -80,10 +76,6 @@ public class LoginController extends HttpServlet {
             request.getRequestDispatcher("/WEB-INF/login_result_fail.jsp").forward(request, response);
             return;
           }
-        }catch(NullPointerException e){
-          e.printStackTrace();
-          request.setAttribute("msgError", e.getMessage());
-          request.getRequestDispatcher("/WEB-INF/login_result_fail.jsp").forward(request, response);
         }catch(SQLException e){
           e.printStackTrace();
           response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
