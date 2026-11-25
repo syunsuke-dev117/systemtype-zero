@@ -23,11 +23,13 @@ public class AccountSuccessController extends HttpServlet {
         response.sendRedirect(request.getContextPath() + "/AccountCreate");
         return;
       }
-      // セッションからアカウントIDを取り出す
+      // セッションからアカウントIDを変数に移す
       Object accountId = session.getAttribute("account_id");
-      // JSPで表示できるようにreuqestに入れる
+      // セッションに保存したIDは削除する(古い情報を持ち続けるため)
+      session.removeAttribute("account_id");
+      // JSPで表示できるようにrequestに入れる
       request.setAttribute("account_id", accountId);
-      // login.jspへ転送
+      // account_create_successへ転送
       request.getRequestDispatcher("/WEB-INF/account_create_success.jsp").forward(request, response);
 
     }catch(ServletException | IOException e){
