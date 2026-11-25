@@ -19,7 +19,7 @@ public class AccountCreateController extends HttpServlet {
   @Override
   protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException , IOException {
     response.setContentType("text/html; charset=UTF-8");
-    // login.jspへ転送
+    // account_create.jspへ転送
     request.getRequestDispatcher("/WEB-INF/account_create.jsp").forward(request, response);
   }
 
