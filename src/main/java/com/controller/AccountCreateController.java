@@ -5,6 +5,8 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+
 import java.io.IOException;
 import java.sql.SQLException;
 
@@ -66,8 +68,12 @@ public class AccountCreateController extends HttpServlet {
           int accountId = new InstructorCreateLogic().registerAccount(account_name, accountPw);
 
           if(accountId != -1){
-            request.setAttribute("account_id", accountId);
-            request.getRequestDispatcher("/WEB-INF/account_create_success.jsp").forward(request, response);
+            // 作成したIDの情報をセッションに保存する
+            HttpSession session = request.getSession();
+            session.setAttribute("account_id", accountId);
+            // フォーム再読み込みの二重登録防止
+            response.sendRedirect(request.getContextPath() + "/AccountSuccess");
+            return; 
           }else{
             request.getRequestDispatcher("/WEB-INF/account_create_fail.jsp").forward(request, response);
             return;
@@ -110,8 +116,12 @@ public class AccountCreateController extends HttpServlet {
           int accountId = new TraineeCreateLogic().registerAccount(account_name, accountPw);
 
           if(accountId != -1){
-            request.setAttribute("account_id", accountId);
-            request.getRequestDispatcher("/WEB-INF/account_create_success.jsp").forward(request, response);
+            // 作成したIDの情報をセッションに保存する
+            HttpSession session = request.getSession();
+            session.setAttribute("account_id", accountId);
+            // フォーム再読み込みの二重登録防止
+            response.sendRedirect(request.getContextPath() + "/AccountSuccess");
+            return;
           }else{
             request.getRequestDispatcher("/WEB-INF/account_create_fail.jsp").forward(request, response);
             return;
