@@ -9,7 +9,7 @@ import java.io.Serializable;
  */
 
 public class LoginUser implements Serializable{
-    // ログイン情報 ID・名前
+    // ログイン情報 ID・名前・ロール
     private int loginId;
     private String loginName;
     private String role;
