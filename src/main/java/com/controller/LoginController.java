@@ -43,13 +43,12 @@ public class LoginController extends HttpServlet {
             LoginUser loginUser = new InstructorLoginLogic().isLogin(loginId, loginPw);
 
             if(loginUser != null){
-              // セッションID作成
-              request.changeSessionId();
-              // ログインの情報をセッションに保存する
+              // loginUserの情報をセッションに保存する
               HttpSession session = request.getSession();
               session.setAttribute("loginUser", loginUser);
-
-              request.getRequestDispatcher("/WEB-INF/login_result_success.jsp").forward(request, response);
+              // ログイン成功後は別のURLにアクセス
+              response.sendRedirect(request.getContextPath() + "/LoginSuccess");
+              return; 
             }else{
               request.getRequestDispatcher("/WEB-INF/login_result_fail.jsp").forward(request, response);
               return;
@@ -69,12 +68,12 @@ public class LoginController extends HttpServlet {
           LoginUser loginUser = new TraineeLoginLogic().isLogin(loginId, loginPw);
 
           if(loginUser != null){
-            // セッションID作成
-            request.changeSessionId();
-            // ログインの情報をセッションに保存する
+            // loginUserの情報をセッションに保存する
             HttpSession session = request.getSession();
             session.setAttribute("loginUser", loginUser);
-            request.getRequestDispatcher("/WEB-INF/login_result_success.jsp").forward(request, response);
+            // ログイン成功後は別のURLにアクセス
+            response.sendRedirect(request.getContextPath() + "/LoginSuccess");
+            return; 
           }else{
             request.getRequestDispatcher("/WEB-INF/login_result_fail.jsp").forward(request, response);
             return;
