@@ -18,6 +18,11 @@ public class AccountSuccessController extends HttpServlet {
       response.setContentType("text/html; charset=UTF-8");
       // セッションを取り出す
       HttpSession session = request.getSession(false);
+      // セッションがない(アカウント作成せずに開いた場合) またアカウントIDがnullの場合
+      if (session == null || session.getAttribute("account_id") == null){
+        response.sendRedirect(request.getContextPath() + "/AccountCreate");
+        return;
+      }
       // セッションからアカウントIDを取り出す
       Object accountId = session.getAttribute("account_id");
       // JSPで表示できるようにreuqestに入れる

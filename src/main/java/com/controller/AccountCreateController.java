@@ -73,6 +73,7 @@ public class AccountCreateController extends HttpServlet {
             session.setAttribute("account_id", accountId);
             // フォーム再読み込みの二重登録防止
             response.sendRedirect(request.getContextPath() + "/AccountSuccess");
+            return; 
           }else{
             request.getRequestDispatcher("/WEB-INF/account_create_fail.jsp").forward(request, response);
             return;
