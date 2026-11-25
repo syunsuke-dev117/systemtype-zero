@@ -43,6 +43,8 @@ public class LoginController extends HttpServlet {
             LoginUser loginUser = new InstructorLoginLogic().isLogin(loginId, loginPw);
 
             if(loginUser != null){
+              // セッションIDを振り直す（セッション固定攻撃の対策）
+              request.changeSessionId();
               // loginUserの情報をセッションに保存する
               HttpSession session = request.getSession();
               session.setAttribute("loginUser", loginUser);
@@ -68,6 +70,8 @@ public class LoginController extends HttpServlet {
           LoginUser loginUser = new TraineeLoginLogic().isLogin(loginId, loginPw);
 
           if(loginUser != null){
+            // セッションIDを振り直す（セッション固定攻撃の対策）
+            request.changeSessionId();
             // loginUserの情報をセッションに保存する
             HttpSession session = request.getSession();
             session.setAttribute("loginUser", loginUser);
