@@ -23,7 +23,7 @@ public class AccountSuccessController extends HttpServlet {
     }
     // セッションからアカウントIDを変数に移す
     Object accountId = session.getAttribute("account_id");
-    // セッションに保存したIDは削除する(古い情報を持ち続けるため)
+    // セッションに保存したIDは削除する(古い情報を持ち続けないため)
     session.removeAttribute("account_id");
     // JSPで表示できるようにrequestに入れる
     request.setAttribute("account_id", accountId);
