@@ -9,6 +9,7 @@ public class TraineeLoginLogic {
     
     // ログイン判定する
     public LoginUser isLogin(int loginId, String loginPw) throws SQLException{
+        String role = "trainee";
         CommonLoginLogic cll = new CommonLoginLogic();
         
         try (Connection cn = ConnectionManager.getConnection()){
@@ -34,7 +35,7 @@ public class TraineeLoginLogic {
             // 仮にセッションにLoginUserを入れてPW情報が入っていた場合
             // ログ情報などにより抜き取られる危険性がある。その防止策として
             // セッション渡す際はLoginUserとして、PW情報を持つのはAccountとする
-            return new LoginUser(account.getLoginId(), account.getLoginName());
+            return new LoginUser(account.getLoginId(), account.getLoginName(), role);
 
         }
 
