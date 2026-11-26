@@ -19,8 +19,8 @@ public class QuestionDAO {
     }
 
     // DBに入っている問題情報をすべて算出する
-    public List<Question> findAll(int loginId) throws SQLException{
-        // IDから情報算出
+    public List<Question> findAll() throws SQLException{
+
         String sql = "SELECT * FROM questions";
         List<Question> listQuestions = new ArrayList<>();
         
