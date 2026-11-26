@@ -26,6 +26,14 @@
         <pre><c:out value="${q.questionCode}" /></pre>
       </c:if>
 
+      <%-- 4択問題 --%>
+      <ul>
+        <li>A. <c:out value="${q.choiceA}" /></li>
+        <li>B. <c:out value="${q.choiceB}" /></li>
+        <li>C. <c:out value="${q.choiceC}" /></li>
+        <li>D. <c:out value="${q.choiceD}" /></li>
+      </ul>
+
     </div>
   </c:forEach>
 
