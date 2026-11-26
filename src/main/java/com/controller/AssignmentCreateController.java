@@ -37,6 +37,11 @@ public class AssignmentCreateController extends HttpServlet {
       try {
         // 問題データリストを取ってくる
         List<Question> listQuestions = new QuestionLogic().findAll();
+        request.setAttribute("listQuestions", listQuestions);
+
+        // assignment_create.jspへ転送
+        request.getRequestDispatcher("/WEB-INF/assignment_create.jsp").forward(request, response);
+        return;
         
       }catch(SQLException e){
           // SQLエラー関連はログに詳細を記したい
@@ -45,12 +50,7 @@ public class AssignmentCreateController extends HttpServlet {
           response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
           return;
       }
-      
-
-
-      // assignment_create.jspへ転送
-      request.getRequestDispatcher("/WEB-INF/assignment_create.jsp").forward(request, response);
-      return;
+    
     }
     // それ以外はアクセスする権限がないので、403エラー表示
     response.sendError(HttpServletResponse.SC_FORBIDDEN);
