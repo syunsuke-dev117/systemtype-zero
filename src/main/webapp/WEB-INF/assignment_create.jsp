@@ -10,5 +10,20 @@
 <body>
   <h1>課題作成</h1>
   <h2>こんにちは。<c:out value="${sessionScope.loginUser.loginName}" />さん</h2>
+
+  <%-- 問題データが空の場合 --%>
+  <c:if test="${empty listQuestions}">
+    <p>問題がまだ空です。管理者に問い合わせてください。
+  </c:if>
+
+  <%-- 問題を表示 --%>
+  <c:forEach var="q" items="${listQuestions}" varStatus="st">
+    <div>
+      <p><b>第<c:out value="${st.count}"/>問</b> <c:out value="${q.questionBody}"/> </p>
+
+    </div>
+  </c:forEach>
+
+
 </body>
 </html>

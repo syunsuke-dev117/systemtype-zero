@@ -8,7 +8,6 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 import com.model.AccountLogin.LoginUser;
@@ -38,10 +37,6 @@ public class AssignmentCreateController extends HttpServlet {
         // 問題データリストを取ってくる
         List<Question> listQuestions = new QuestionLogic().findAll();
         request.setAttribute("listQuestions", listQuestions);
-
-        // assignment_create.jspへ転送
-        request.getRequestDispatcher("/WEB-INF/assignment_create.jsp").forward(request, response);
-        return;
         
       }catch(SQLException e){
           // SQLエラー関連はログに詳細を記したい
@@ -50,6 +45,10 @@ public class AssignmentCreateController extends HttpServlet {
           response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
           return;
       }
+
+       // assignment_create.jspへ転送
+      request.getRequestDispatcher("/WEB-INF/assignment_create.jsp").forward(request, response);
+      return;
     
     }
     // それ以外はアクセスする権限がないので、403エラー表示
