@@ -38,7 +38,7 @@ public class QuestionDAO {
                         res.getString("choice_b"),
                         res.getString("choice_c"),
                         res.getString("choice_d"),
-                        res.getString("answer_choide"),
+                        res.getString("answer_choice"),
                         res.getString("answer_explanation"),
                         res.getInt("genre_id")
                     );
