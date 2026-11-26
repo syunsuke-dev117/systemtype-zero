@@ -19,7 +19,12 @@
   <%-- 問題を表示 --%>
   <c:forEach var="q" items="${listQuestions}" varStatus="st">
     <div>
-      <p><b>第<c:out value="${st.count}"/>問</b> <c:out value="${q.questionBody}"/> </p>
+      <p><b>第<c:out value="${st.count}"/>問</b> <c:out value="${q.questionBody}"/></p>
+
+      <%-- コードがある問題はさらに表示 --%>
+      <c:if test="${not empty q.questionCode}">
+        <pre><c:out value="${q.questionCode}" /></pre>
+      </c:if>
 
     </div>
   </c:forEach>
