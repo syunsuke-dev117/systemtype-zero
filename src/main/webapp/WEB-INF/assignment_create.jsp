@@ -32,8 +32,8 @@
   <%-- 問題を表示 --%>
   <c:forEach var="q" items="${listQuestions}" varStatus="st">
     <div>
-        <input type="checkbox" id="check_question_id" name="check_question_id" value=<c:out value="${q.questionId}"/>>
-        <label for="check_question_id"><b>第<c:out value="${st.count}"/>問</b> <c:out value="${q.questionBody}"/></label>
+        <input type="checkbox" id="${q.questionId}" name="check_question_id" value=<c:out value="${q.questionId}"/>>
+        <label for="${q.questionId}"><b>第<c:out value="${st.count}"/>問</b> <c:out value="${q.questionBody}"/></label>
 
       <%-- コードがある問題はさらに表示 --%>
       <c:if test="${not empty q.questionCode}">
