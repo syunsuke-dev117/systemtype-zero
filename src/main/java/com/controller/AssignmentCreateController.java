@@ -8,6 +8,8 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 
+import com.model.AccountLogin.LoginUser;
+
 @WebServlet("/AssignmentCreate")
 public class AssignmentCreateController extends HttpServlet {
   @Override
@@ -21,8 +23,16 @@ public class AssignmentCreateController extends HttpServlet {
       response.sendRedirect(request.getContextPath() + "/Login");
       return;
     }
-    // assignment_create.jspへ転送
-    request.getRequestDispatcher("/WEB-INF/assignment_create.jsp").forward(request, response);
+    LoginUser loginUser = (LoginUser)session.getAttribute("loginUser");
 
+    // ロールチェック
+    // 講師だけ課題作成ページにアクセスできるようにする
+    if ("instructor".equals(loginUser.getRole())){
+      // assignment_create.jspへ転送
+      request.getRequestDispatcher("/WEB-INF/assignment_create.jsp").forward(request, response);
+      return;
+    }
+    // それ以外はアクセスする権限がないので、403エラー表示
+    response.sendError(HttpServletResponse.SC_FORBIDDEN);
   }
 }
