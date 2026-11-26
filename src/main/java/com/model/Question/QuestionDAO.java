@@ -16,6 +16,7 @@ public class QuestionDAO {
     }
 
     // DBに入っている問題情報をすべて算出する
+    // QuestionLogicに問題データを返すためfindAllを作成した
     public List<Question> findAll() throws SQLException{
 
         String sql = "SELECT * FROM questions";

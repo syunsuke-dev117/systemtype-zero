@@ -7,6 +7,7 @@ import com.model.ConnectionManager;
 
 public class QuestionLogic {
     
+    // AssignmentCreateControllerに問題データを返すため
     public List<Question> findAll() throws SQLException{
 
         try (Connection cn = ConnectionManager.getConnection()) {
