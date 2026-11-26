@@ -50,7 +50,7 @@ public class LoginController extends HttpServlet {
               // loginUserの情報をセッションに保存する
               session.setAttribute("loginUser", loginUser);
               // ログイン成功後は別のURLにアクセス
-              response.sendRedirect(request.getContextPath() + "/AssigmentCreate");
+              response.sendRedirect(request.getContextPath() + "/AssignmentCreate");
               return; 
             }else{
               request.getRequestDispatcher("/WEB-INF/login_result_fail.jsp").forward(request, response);
