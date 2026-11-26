@@ -1,0 +1,14 @@
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AssignmentCreate</title>
+</head>
+<body>
+  <h1>課題作成</h1>
+  <h2>こんにちは。<c:out value="${sessionScope.loginUser.loginName}" />さん</h2>
+</body>
+</html>

@@ -8,8 +8,8 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 
-@WebServlet("/LoginSuccess")
-public class LoginSuccessController extends HttpServlet {
+@WebServlet("/TraineeLoginSuccess")
+public class TraineeLoginSuccessController extends HttpServlet {
   @Override
   protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException , IOException {
 
@@ -22,7 +22,7 @@ public class LoginSuccessController extends HttpServlet {
       return;
     }
     // login_result_successへ転送
-    request.getRequestDispatcher("/WEB-INF/login_result_success.jsp").forward(request, response);
+    request.getRequestDispatcher("/WEB-INF/trainee_login_result_success.jsp").forward(request, response);
 
   }
 }
