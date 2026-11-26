@@ -29,15 +29,15 @@ public class QuestionDAO {
 
             try (ResultSet res = stmt.executeQuery()){
                 // 問題データがあればlistQuestionsリストに追加でいれていく
-                if(res.next()){
+                while(res.next()){
                     Question q = new Question(
                         res.getInt("question_id"),
                         res.getString("question_body"),
                         res.getString("question_code"),
                         res.getString("choice_a"),
-                        res.getString("choide_b"),
-                        res.getString("choide_c"),
-                        res.getString("choide_d"),
+                        res.getString("choice_b"),
+                        res.getString("choice_c"),
+                        res.getString("choice_d"),
                         res.getString("answer_choide"),
                         res.getString("answer_explanation"),
                         res.getInt("genre_id")
@@ -46,7 +46,7 @@ public class QuestionDAO {
                 }
             }  
         }
-        // 問題情報リストを返す。データがない場合は0(空値)で返る。
+        // 問題情報リストを返す。データがない場合は空値で返る。
         return listQuestions;
     }
 }
