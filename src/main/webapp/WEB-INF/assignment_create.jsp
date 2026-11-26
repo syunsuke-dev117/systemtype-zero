@@ -9,7 +9,7 @@
 </head>
 <body>
   <h1>課題作成</h1>
-  <h2>こんにちは。<c:out value="${sessionScope.loginUser.loginName}" />さん</h2>
+  <h2>ログイン中の講師:<c:out value="${sessionScope.loginUser.loginName}" /></h2>
 
   <%-- 問題データが空の場合 --%>
   <c:if test="${empty listQuestions}">
