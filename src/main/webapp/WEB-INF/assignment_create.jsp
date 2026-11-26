@@ -11,6 +11,19 @@
   <h1>課題作成</h1>
   <h2>ログイン中の講師:<c:out value="${sessionScope.loginUser.loginName}" /></h2>
 
+<form action="<c:url value='/AssignmentCreate' />" method="post">
+
+  <div>
+    <label for="assignment_name"><b>課題名:</b></label>
+    <input type="text" id="assignment_name" name="assignment_name" maxlength="100">
+  </div>
+
+  <%--- 提出期限は必要そうなら後に実装する。現段階ではつけない 
+  <div>
+    <label for="assignment_name">:</label>
+    <input type="text" id="assignment_name" name="assignment_name" maxlength="100">
+  </div>--%>
+
   <%-- 問題データが空の場合 --%>
   <c:if test="${empty listQuestions}">
     <p>問題がまだ空です。管理者に問い合わせてください。</p>
@@ -36,7 +49,7 @@
 
     </div>
   </c:forEach>
-
+</form>
 
 </body>
 </html>
