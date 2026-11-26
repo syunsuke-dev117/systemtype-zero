@@ -33,7 +33,7 @@ public class QuestionDAO {
             try (ResultSet res = stmt.executeQuery()){
                 // 問題データがあればlistQuestionsリストに追加でいれていく
                 if(res.next()){
-                    Question q = Question(
+                    Question q = new Question(
                         res.getInt("question_id"),
                         res.getString("question_body"),
                         res.getString("question_code"),
