@@ -7,10 +7,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.model.AccountLogin.Account;
-import com.model.Question.Question;
-import com.model.ConnectionManager;
-
 public class QuestionDAO {
     // DB接続時に必要なConnectionを宣言
     private Connection cn;

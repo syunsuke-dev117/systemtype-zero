@@ -56,10 +56,6 @@ public class Question {
     public String getChoiceD() {
         return choiceD;
     }
-    
-    public int getGenreId() {
-        return genreId;
-    }
 
     public String getAnswerChoice() {
         return answerChoice;
@@ -67,6 +63,10 @@ public class Question {
 
     public String getAnswerExplanation() {
         return answerExplanation;
+    }
+
+    public int getGenreId() {
+        return genreId;
     }
     
 }
