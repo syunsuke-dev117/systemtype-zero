@@ -13,7 +13,9 @@ public class Question {
     private int genreId;
 
     // 問題文や選択肢などの情報を保持するクラス
-    public Question(){
+    public Question(int questionId, String questionBody, String questionCode, 
+                    String choiceA, String choiceB, String choiceC, String choiceD, 
+                    String answerChoice, String answerExplanation, int genreId){
         this.questionId        = questionId;
         this.questionBody      = questionBody;
         this.questionCode      = questionCode;
