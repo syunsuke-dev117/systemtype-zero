@@ -25,7 +25,8 @@ public class AssignmentCreateController extends HttpServlet {
     }
     LoginUser loginUser = (LoginUser)session.getAttribute("loginUser");
 
-    // ロールチェック 研修生なら弾く
+    // ロールチェック
+    // 講師だけ課題作成ページにアクセスできるようにする
     if ("instructor".equals(loginUser.getRole())){
       // assignment_create.jspへ転送
       request.getRequestDispatcher("/WEB-INF/assignment_create.jsp").forward(request, response);
