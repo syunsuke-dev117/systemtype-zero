@@ -60,7 +60,7 @@ public class AssignmentCreateController extends HttpServlet {
     response.setContentType("text/html; charset=UTF-8");
 
     // 課題名とチェックしたIDを取得する
-    String assignmentName      = request.getParameter("assignment_name");
+    String assignmentTitle      = request.getParameter("assignment_name");
     // チェックしたIDは複数なので受け取り型は文字列配列
     String[] checkQuestionList = request.getParameterValues("check_question_id");
 
@@ -77,7 +77,7 @@ public class AssignmentCreateController extends HttpServlet {
     // 講師以外は課題を保存する権限がないので、ここで弾く
     if("instructor".equals(loginUser.getRole())){
         // 課題を保存するためにLogicを通してDAOから結果を返す
-        
+
     }
     // それ以外は権限ないので403エラー
     response.sendError(HttpServletResponse.SC_FORBIDDEN);
