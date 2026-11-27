@@ -79,6 +79,9 @@ public class AssignmentCreateController extends HttpServlet {
         // 課題を保存するためにLogicを通してDAOから結果を返す
         // 保存するのは課題名・チェックしたID・講師ID
         // 講師IDはセッションに保存されているので、loginUserからIDを取る
+        // 1. 課題名を課題表に保存する
+        // 2. 保存の際に識別の課題IDも取得する
+        // 3. IDを取得したのちにチェックした問題IDとともに課題問題表に保存する
 
     }
     // それ以外は権限ないので403エラー
