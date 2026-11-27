@@ -54,4 +54,15 @@ public class AssignmentCreateController extends HttpServlet {
     // それ以外はアクセスする権限がないので、403エラー表示
     response.sendError(HttpServletResponse.SC_FORBIDDEN);
   }
+
+  @Override 
+  protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException , IOException {
+    // 課題名とチェックしたIDを取得する
+    String assignmentName      = request.getParameter("assignment_name");
+    // チェックしたIDは複数なので受け取り型は文字列配列
+    String[] checkQuestionList = request.getParameterValues("check_question_id");
+
+
+
+  }
 }
