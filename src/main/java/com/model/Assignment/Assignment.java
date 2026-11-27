@@ -3,9 +3,9 @@ package com.model.Assignment;
 public class Assignment {
     private int assignmentId;
     private String assignmentTitle;
-    private String assignmentCreatedById;
+    private int assignmentCreatedById;
 
-    public Assignment(int assignmentId, String assignmentTitle, String assignmentCreatedById){
+    public Assignment(int assignmentId, String assignmentTitle, int assignmentCreatedById){
         this.assignmentId          = assignmentId;
         this.assignmentTitle       = assignmentTitle;
         this.assignmentCreatedById = assignmentCreatedById;
@@ -20,7 +20,7 @@ public class Assignment {
         return assignmentTitle;
     }
 
-    public String getAssignmentCreatedById(){
+    public int getAssignmentCreatedById(){
         return assignmentCreatedById;
     }
     
