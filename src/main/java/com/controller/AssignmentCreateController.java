@@ -77,6 +77,8 @@ public class AssignmentCreateController extends HttpServlet {
     // 講師以外は課題を保存する権限がないので、ここで弾く
     if("instructor".equals(loginUser.getRole())){
         // 課題を保存するためにLogicを通してDAOから結果を返す
+        // 保存するのは課題名・チェックしたID・講師ID
+        // 講師IDはセッションに保存されているので、loginUserからIDを取る
 
     }
     // それ以外は権限ないので403エラー
