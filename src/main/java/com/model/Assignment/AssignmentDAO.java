@@ -27,7 +27,7 @@ public class AssignmentDAO {
         try (PreparedStatement stmt = cn.prepareStatement(insertSql, java.sql.Statement.RETURN_GENERATED_KEYS)){
             // SQL文の「?」に代入する
             stmt.setString(1, assignmentTitle);
-            stmt.setInt(2, instructorId);
+            stmt.setInt(2, instructorCreatedById);
             // DB側で実行       
             stmt.executeUpdate();
 

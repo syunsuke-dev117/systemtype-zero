@@ -11,6 +11,8 @@ import java.sql.SQLException;
 import java.util.List;
 
 import com.model.AccountLogin.LoginUser;
+import com.model.Assignment.Assignment;
+import com.model.Assignment.AssignmentLogic;
 import com.model.Question.Question;
 import com.model.Question.QuestionLogic;
 
@@ -76,14 +78,27 @@ public class AssignmentCreateController extends HttpServlet {
     // ロールチェック
     // 講師以外は課題を保存する権限がないので、ここで弾く
     if("instructor".equals(loginUser.getRole())){
-        // 課題を保存するためにLogicを通してDAOから結果を返す
-        // 保存するのは課題名・チェックしたID・講師ID
-        // 講師IDはセッションに保存されているので、loginUserからIDを取る
-        // 1. 課題名を課題表に保存する
-        // 2. 保存の際に識別の課題IDも取得する
-        // 3. IDを取得したのちにチェックした問題IDとともに課題問題表に保存する
-        
+        // 課題を保存するためにLogicを通してDAOから結果を返す ☑
+        // 保存するのは課題名・チェックしたID・講師ID ☑
+        // 講師IDはセッションに保存されているので、loginUserからIDを取る ☑
+        // 1. 課題名を課題表に保存する ☑
+        // 2. 保存の際に識別の課題IDも取得する ☑
+        // 3. 課題IDを取得したのちにチェックした問題IDとともに課題問題表に保存する
+        // 4.課題問題表に保存後は、JOINを使って問題表と課題問題表を結合させたデータを抽出して表示させる
+        // Ex. Logicクラスでnullチェックなどを設ける
 
+        // 2. まで完了して課題表に課題名が入っていることを動作確認済み
+        try{
+          Assignment asssignmentInfo = new AssignmentLogic().saveAssignment(assignmentTitle, loginUser.getLoginId());
+          return;
+        }catch(SQLException e){
+          // SQLエラー関連はログに詳細を記したい
+          e.printStackTrace();
+          // ブラウザ側は500エラーと表示
+          response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+          return;
+        }
+        
     }
     // それ以外は権限ないので403エラー
     response.sendError(HttpServletResponse.SC_FORBIDDEN);
