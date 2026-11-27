@@ -57,12 +57,29 @@ public class AssignmentCreateController extends HttpServlet {
 
   @Override 
   protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException , IOException {
+    response.setContentType("text/html; charset=UTF-8");
+
     // 課題名とチェックしたIDを取得する
     String assignmentName      = request.getParameter("assignment_name");
     // チェックしたIDは複数なので受け取り型は文字列配列
     String[] checkQuestionList = request.getParameterValues("check_question_id");
 
-
-
+    // セッションを取り出す
+    HttpSession session = request.getSession(false);
+    // セッションがない またloginUserがnullの場合
+    if (session == null || session.getAttribute("loginUser") == null){
+      response.sendRedirect(request.getContextPath() + "/Login");
+      return;
+    }
+    LoginUser loginUser = (LoginUser)session.getAttribute("loginUser");
+    
+    // ロールチェック
+    // 講師以外は課題を保存する権限がないので、ここで弾く
+    if("instructor".equals(loginUser.getRole())){
+        // 課題を保存するためにLogicを通してDAOから結果を返す
+        
+    }
+    // それ以外は権限ないので403エラー
+    response.sendError(HttpServletResponse.SC_FORBIDDEN);
   }
 }
